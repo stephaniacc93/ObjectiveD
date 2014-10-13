@@ -159,22 +159,6 @@ namespace AnalizadorLexico.Library
             return true;
         }
 
-        public bool esOperador()
-        {
-
-            //TENGO DUDAS EN ESTE
-            if (inputArray[i] == '<' || inputArray[i] == '>' || inputArray[i] == '=')
-            {
-                i++;
-                esOperador();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         public bool esElse()
         {
             return true;
