@@ -18,97 +18,130 @@ namespace AnalizadorLexico.Library
 
         public void EmpezarAnalizador()
         {
+            inputs = new List<Input>();
             Console.WriteLine("Ingrese el codigo");
+            
             string input = Console.ReadLine();
             inputArray = input.ToCharArray();
 
-            while (i <= inputArray.Count() - 1)
+            for (int j = 0; j <= inputArray.Count() - 1; j++)
             {
-                if (esNumero())
+                try
                 {
-                    if (input[i] == '.')
-                    {
-                        i++;
-                        if (esNumero())
-                        {
-                            //printf("[real]");
-                        }
-                        else if (input[i] == '.')
-                        {
-                            //printf("[entero]");
-                            //printf("[rango]");
-                        }
-                    }
-                    else
-                    {
-                        //printf("[entero]");
-                    }
-                }
-                else if (esIdentificador())
-                {
-                    //printf("[identificador]");
-                }
-                else if (esOperador())
-                {
-                    //printf("[asignación]");
 
-                }
-                else if (esIf())
-                {
-                    //printf("[asignación]");
-                }
-                else if (esElseIf())
-                {
-                    //printf("[asignación]");
-                }
-                else if (esElse())
-                {
-                    //printf("[asignación]");
-                }
-                else if (esWhile())
-                {
-                    //printf("[asignación]");
-                }
-                else if (esSaltoDeLinea())
-                {
-                    
-                }
-                else
-                {
-                    i++;
-                }
-            }
-        }
-
-        //Cambiar 
-        public bool esSaltoDeLinea()
-        {
-            return true;
-        }
-
-        //EJEMPLO: WHILE
-        public bool esWhile()
-        {
-            if ((inputArray[i] + inputArray[i + 1] + inputArray[i + 2] + inputArray[i + 3] + inputArray[i + 4]).ToString().ToLower() == "while")
-            {
-                i += 4;
-                inputs.Add(new Input(TipoDeToken.While,"while", NoLinea));
-                if (esParentesisInicial())
-                {
-                    i++;
-                    if (esIdentificador())
+                    if (esNumero())
                     {
-                        i++;
-                        //inputs.Add(new Input(TipoDeToken.Identificador,"", NoLinea));
-                        if (esOperador())
+                        inputs.Add(new Input(TipoDeToken.Real, inputArray[i - 1].ToString(), NoLinea));
+                        if (inputArray[i] == '.')
                         {
                             i++;
-                            //inputs.Add(new Input(TipoDeToken.Operador, NoLinea));
-                            if (esConstante())
+                            if (esNumero())
+                            {
+                                inputs.Add(new Input(TipoDeToken.Real, inputArray[i - 1].ToString(), NoLinea));
+                            }
+                            else if (inputArray[i] == '.')
+                            {
+                                inputs.Add(new Input(TipoDeToken.Rango, inputArray[i - 1].ToString(), NoLinea));
+                                i++;
+                            }
+                        }
+                        else if (esNumero())
+                        {
+                            inputs.Add(new Input(TipoDeToken.Entero, inputArray[i - 1].ToString(), NoLinea));
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+
+                esWhile();
+                esIdentificador();
+                esElse();
+                esIf();
+                esElseIf();
+                esParentesisInicial();
+                esParentesisTerminal();
+                //esConstante();
+                esFor();
+                esForeach();
+                esPuntoYComa();
+                esOperadorValido();
+                esLlaveInicial();
+                esLlaveTerminal();
+                esIncremento();
+                esSaltoDeLinea();
+            }
+
+            foreach (var inp in inputs)
+            {
+                Console.WriteLine("[" + (int)inp.tipoDeToken + "] ");
+            }
+            Console.ReadLine();
+        }
+
+        private bool esSaltoDeLinea()
+        {
+            try
+            {
+                if (inputArray[i].ToString() == "/" && (inputArray[i + 1].ToString() == "n" || inputArray[i + 1].ToString() == "t"))
+                {
+                    NoLinea++;
+                    i += 2;
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return false;
+        }
+
+        //CAMBIAR: WHILE
+        private bool esWhile()
+        {
+            try
+            {
+                int esBlanco = 0;
+                if (inputArray.Count() > 5)
+                {
+                    if (
+                        (inputArray[i] + inputArray[i + 1] + inputArray[i + 2] + inputArray[i + 3] + inputArray[i + 4])
+                            .ToString().ToLower() == "while")
+                    {
+                        i += 4;
+                        inputs.Add(new Input(TipoDeToken.While, "while", NoLinea));
+                        //esBlanco =  esEspacioEnBlanco()
+                        if (esParentesisInicial() && esBlanco == 0)
+                        {
+                            i++;
+                            if (esIdentificador())
                             {
                                 i++;
-                                //inputs.Add(new Input(TipoDeToken.Constante, NoLinea));
-                                return true;
+                                //inputs.Add(new Input(TipoDeToken.Identificador,"", NoLinea));
+                                if (esOperadorValido())
+                                {
+                                    i++;
+                                    //inputs.Add(new Input(TipoDeToken.Operador, NoLinea));
+                                    //if (esConstante())
+                                    //{
+                                    //    i++;
+                                    //    //inputs.Add(new Input(TipoDeToken.Constante, NoLinea));
+                                    //    return true;
+                                    //}
+                                    //else
+                                    //{
+                                    //    //inputs.Add(new Input(TipoDeToken.Error, NoLinea));
+                                    //    return false;
+                                    //}
+                                }
+
+                                else
+                                {
+                                    //inputs.Add(new Input(TipoDeToken.Error, NoLinea));
+                                    return false;
+                                }
                             }
                             else
                             {
@@ -116,249 +149,446 @@ namespace AnalizadorLexico.Library
                                 return false;
                             }
                         }
-
                         else
                         {
                             //inputs.Add(new Input(TipoDeToken.Error, NoLinea));
-                            return false;
                         }
-                    }
-                    else
-                    {
-                        //inputs.Add(new Input(TipoDeToken.Error, NoLinea));
                         return false;
                     }
                 }
-                else
-                {
-                    //inputs.Add(new Input(TipoDeToken.Error, NoLinea));
-                    return false;
-                }
             }
-            else
+            catch (Exception e)
             {
-                return false;
-            }
-        }
-
-        //checar
-        public bool esNumero()
-        {
-            if (char.IsDigit(inputArray[i]))
-            {
-                i++;
-                return true;
-            }
-            else
-                return false;
-        }
-
-        public bool esIdentificador()
-        {
-            //TENGO DUDAS EN ESTE
-            return true;
-        }
-
-        public bool esElse()
-        {
-            return true;
-        }
-
-        public bool esIf()
-        {
-            return true;
-        }
-
-        public bool esElseIf()
-        {
-            return true;
-        }
-
-        public bool esParentesisInicial()
-        {
-            //aprueba si es parentesis si, si agregar input
-            if (inputArray[i] == '(')
-            {
-                i++;
-                inputs.Add(new Input(TipoDeToken.ParentesisInicial, "(", NoLinea));
-                return true;
             }
             return false;
         }
 
-        public bool esParentesisTerminal()
+        private bool esNumero()
         {
-            if (inputArray[i] == ')')
+            try
             {
-                i++;
-                inputs.Add(new Input(TipoDeToken.ParentesisFinal, ")", NoLinea));
-                return true;
-            }
-            return false;
-        }
 
-        public bool esConstante()
-        {
-            string constante = String.Empty;
-            if (inputArray[i].ToString().IndexOfAny(NUMEROS) >= 0)
-            {
-                do
+                if (char.IsDigit(inputArray[i]))
                 {
-                    constante += inputArray[i];
                     i++;
-                }
-                while (inputArray[i].ToString().IndexOfAny(NUMEROS) >= 0);
-                inputs.Add(new Input(TipoDeToken.Constante, constante, NoLinea));
-                return true;
-            }
-            return false;
-        }
-
-
-        public bool esFor()
-        {
-            if (inputArray[i] == 'f' && inputArray[i + 1] == 'o' && inputArray[i + 2] == 'r')
-            {
-                i += 2;
-                inputs.Add(new Input(TipoDeToken.Foreach, "foreach", NoLinea));
-                return true;
-            }
-            return false;
-        }
-
-        public bool esSwitch()
-        {
-            return true;
-        }
-
-        public bool esForeach()
-        {
-            if(inputArray[i] == 'f' && inputArray[i+1] == 'o' && inputArray[i+2]=='r')
-                if (inputArray[i + 3] == 'e' && inputArray[i + 4] == 'a' && inputArray[i + 5] == 'c' && inputArray[i+6] == 'h')
-                {
-                    i += 6;
-                    inputs.Add(new Input(TipoDeToken.Foreach, "foreach", NoLinea));
                     return true;
                 }
+            }
+            catch (Exception e)
+            {
+            }
             return false;
         }
 
-        public bool esChar()
+        private bool esIdentificador()
         {
-            return true;
+            try
+            {
+
+                int empiezaIdentificador = i;
+                if (char.IsLetter(inputArray[i]))
+                {
+                    string lexema = "";
+                    lexema += inputArray[i].ToString();
+                    i++;
+                    if (esLetraODigito())
+                    {
+                        for (int x = empiezaIdentificador; x == i; x++)
+                        {
+                            lexema += inputArray[x];
+                        }
+                        return true;
+                    }
+                    inputs.Add(new Input(TipoDeToken.Identificador, lexema, NoLinea));
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return false;
         }
 
-        public bool esPuntoYComa()
+        private bool esLetraODigito()
         {
-            if (inputArray[i] == ';')
+            try
             {
-                i++;
-                inputs.Add(new Input(TipoDeToken.PuntoComa, ";", NoLinea));
-                return true;
+                if (char.IsLetterOrDigit(inputArray[i]))
+                {
+                    i++;
+                    esLetraODigito();
+                    return true;
+                }
             }
-            else
-                return false;
+            catch (Exception)
+            {
+            }
+            return false;
         }
 
-        public bool esMayor()
+        private bool esElse()
         {
-            if (inputArray[i] == '>')
+            try
             {
-                i++;
-                inputs.Add(new Input(TipoDeToken.Mayor, ">", NoLinea));
-                return true;
+                if (inputArray.Count() > 4)
+                {
+                    if (inputArray[i] == 'e' && inputArray[i + 1] == 'l' && inputArray[i + 2] == 's' &&
+                        inputArray[i + 3] == 'e')
+                    {
+                        i += 4;
+                        inputs.Add(new Input(TipoDeToken.Else, "else", NoLinea));
+                        return true;
+                    }
+                }
             }
-            else
-                return false;
-        }
-        public bool esMenor()
-        {
-            if (inputArray[i] == '>')
+            catch (Exception)
             {
-                i++;
-                inputs.Add(new Input(TipoDeToken.Menor, "<", NoLinea));
-                return true;
             }
-            else
-                return false;
+            return false;
         }
 
-        public bool esMenorIgual()
+        private bool esIf()
         {
-            if (inputArray[i] == '<')
+            try
+            {
+                if (inputArray.Count() > 2)
+                {
+                    if (inputArray[i] == 'i' && inputArray[i + 1] == 'f')
+                    {
+                        i += 2;
+                        inputs.Add(new Input(TipoDeToken.If, "if", NoLinea));
+                        return true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return false;
+        }
+
+        private bool esElseIf()
+        {
+            try
+            {
+                if (esElse() && esIf())
+                {
+                    inputs.Add(new Input(TipoDeToken.Elseif, "else if", NoLinea));
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return false;
+        }
+
+        private bool esParentesisInicial()
+        {
+            try
+            {
+                //aprueba si es parentesis si, si agregar input
+                if (inputArray[i] == '(')
+                {
+                    i++;
+                    inputs.Add(new Input(TipoDeToken.ParentesisInicial, "(", NoLinea));
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return false;
+        }
+
+        private bool esParentesisTerminal()
+        {
+            try
+            {
+                if (inputArray[i] == ')')
+                {
+                    i++;
+                    inputs.Add(new Input(TipoDeToken.ParentesisFinal, ")", NoLinea));
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return false;
+        }
+
+        //private bool esConstante()
+        //{
+        //    try
+        //    {
+        //        string constante = String.Empty;
+        //        if (inputArray[i].ToString().IndexOfAny(NUMEROS) >= 0)
+        //        {
+        //            do
+        //            {
+        //                constante += inputArray[i];
+        //                i++;
+        //            }
+        //            while (inputArray[i].ToString().IndexOfAny(NUMEROS) >= 0);
+        //            inputs.Add(new Input(TipoDeToken.Constante, constante, NoLinea));
+        //            return true;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //    }
+        //    return false;
+        //}
+
+
+        private bool esFor()
+        {
+            try
+            {
+                if (inputArray.Count() > 3)
+                {
+                    if (inputArray[i] == 'f' && inputArray[i + 1] == 'o' && inputArray[i + 2] == 'r')
+                    {
+                        i += 3;
+                        inputs.Add(new Input(TipoDeToken.Foreach, "foreach", NoLinea));
+                        return true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return false;
+        }
+
+
+        private bool esForeach()
+        {
+            try
+            {
+                if (inputArray.Count() > 7)
+                {
+                    if (inputArray[i] == 'f' && inputArray[i + 1] == 'o' && inputArray[i + 2] == 'r')
+                        if (inputArray[i + 3] == 'e' && inputArray[i + 4] == 'a' && inputArray[i + 5] == 'c' &&
+                            inputArray[i + 6] == 'h')
+                        {
+                            i += 7;
+                            inputs.Add(new Input(TipoDeToken.Foreach, "foreach", NoLinea));
+                            return true;
+                        }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return false;
+        }
+
+
+        private bool esPuntoYComa()
+        {
+            try
+            {
+                if (inputArray[i] == ';')
+                {
+                    i++;
+                    inputs.Add(new Input(TipoDeToken.PuntoComa, ";", NoLinea));
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            return false;
+        }
+
+        private bool esMayor()
+        {
+            try
+            {
+                if (inputArray[i] == '>')
+                {
+                    i++;
+                    inputs.Add(new Input(TipoDeToken.Mayor, ">", NoLinea));
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return false;
+        }
+        private bool esMenor()
+        {
+            try
+            {
+                if (inputArray[i] == '>')
+                {
+                    i++;
+                    inputs.Add(new Input(TipoDeToken.Menor, "<", NoLinea));
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            return false;
+        }
+
+        private bool esMenorIgual()
+        {
+            try
+            {
+                if (inputArray[i] == '<')
+                    if (inputArray[i + 1] == '=')
+                    {
+                        i += 2;
+                        inputs.Add(new Input(TipoDeToken.MenorIgual, "<=", NoLinea));
+                        return true;
+                    }
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return false;
+        }
+        private bool esMayorIgual()
+        {
+            try
+            {
+                if (inputArray[i] == '>')
+                    if (inputArray[i + 1] == '=')
+                    {
+                        i += 2;
+                        inputs.Add(new Input(TipoDeToken.MayorIgual, ">=", NoLinea));
+                        return true;
+                    }
+            }
+            catch (Exception)
+            {
+            }
+
+            return false;
+        }
+        private bool esDiferente()
+        {
+            try
+            {
+
+                if (inputArray[i] == '!')
+                    if (inputArray[i + 1] == '=')
+                    {
+                        i += 2;
+                        inputs.Add(new Input(TipoDeToken.Diferente, "!=", NoLinea));
+                        return true;
+                    }
+            }
+            catch (Exception)
+            {
+            }
+
+            return false;
+        }
+
+        private bool esIgual()
+        {
+            try
+            {
                 if (inputArray[i + 1] == '=')
                 {
-                    i += 2;
-                    inputs.Add(new Input(TipoDeToken.MenorIgual, "<=", NoLinea));
+                    i++;
+                    inputs.Add(new Input(TipoDeToken.Igual, "=", NoLinea));
                     return true;
                 }
-            return false;
-        }
-        public bool esMayorIgual()
-        {
-            if (inputArray[i] == '>')
-                if (inputArray[i + 1] == '=')
-                {
-                    i += 2;
-                    inputs.Add(new Input(TipoDeToken.MayorIgual, ">=", NoLinea));
-                    return true;
-                }
-            return false;
-        }
-        public bool esDiferente()
-        {
-            if (inputArray[i] == '!')
-                if (inputArray[i + 1] == '=')
-                {
-                    i += 2;
-                    inputs.Add(new Input(TipoDeToken.Diferente, "!=", NoLinea));
-                    return true;
-                }
-            return false;
-        }
-
-        public bool esIgual()
-        {
-            if (inputArray[i + 1] == '=')
-            {
-                i++;
-                inputs.Add(new Input(TipoDeToken.Igual, "=", NoLinea));
-                return true;
             }
-            return false;
-        }
-
-        public bool esLlaveInicial()
-        {
-            if (inputArray[i] == '{')
+            catch (Exception)
             {
-                i++;
-                inputs.Add(new Input(TipoDeToken.LlaveInicial, "{", NoLinea));
-                return true;
+
             }
+
             return false;
         }
 
-        public bool esLlaveTerminal()
+        private bool esLlaveInicial()
         {
-            if (inputArray[i] == '}')
+            try
             {
-                i++;
-                inputs.Add(new Input(TipoDeToken.LlaveFinal, "}", NoLinea));
-                return true;
-            }
-            return false;
-        }
 
-        public bool esIncremento()
-        {
-            if (inputArray[i] == '+')
-                if (inputArray[i + 1] == '+')
+                if (inputArray[i] == '{')
                 {
-                    i += 2;
-                    inputs.Add(new Input(TipoDeToken.Incremento, "++", NoLinea));
+                    i++;
+                    inputs.Add(new Input(TipoDeToken.LlaveInicial, "{", NoLinea));
                     return true;
                 }
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return false;
+        }
+
+        private bool esLlaveTerminal()
+        {
+            try
+            {
+                if (inputArray[i] == '}')
+                {
+                    i++;
+                    inputs.Add(new Input(TipoDeToken.LlaveFinal, "}", NoLinea));
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            return false;
+        }
+
+        private bool esIncremento()
+        {
+            try
+            {
+                if (inputArray[i] == '+')
+                    if (inputArray[i + 1] == '+')
+                    {
+                        i += 2;
+                        inputs.Add(new Input(TipoDeToken.Incremento, "++", NoLinea));
+                        return true;
+                    }
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return false;
+        }
+
+        private bool esOperadorValido()
+        {
+            try
+            {
+                bool response = false;
+                if (esMayorIgual())
+                {
+                    return true;
+                    //de esto todavia falta
+                }
+            }
+            catch (Exception)
+            {
+            }
             return false;
         }
 

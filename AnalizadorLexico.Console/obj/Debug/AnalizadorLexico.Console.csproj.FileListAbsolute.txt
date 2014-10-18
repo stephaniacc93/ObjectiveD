@@ -1,0 +1,8 @@
+C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Console\bin\Debug\AnalizadorLexico.Console.exe.config
+C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Console\bin\Debug\AnalizadorLexico.Console.exe
+C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Console\bin\Debug\AnalizadorLexico.Console.pdb
+C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Console\bin\Debug\AnalizadorLexico.Library.dll
+C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Console\bin\Debug\AnalizadorLexico.Library.pdb
+C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Console\obj\Debug\AnalizadorLexico.Console.csprojResolveAssemblyReference.cache
+C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Console\obj\Debug\AnalizadorLexico.Console.exe
+C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Console\obj\Debug\AnalizadorLexico.Console.pdb
