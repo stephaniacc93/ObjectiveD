@@ -8,3 +8,8 @@ C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Libr
 C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Library\bin\Debug\AnalizadorLexico.Library.dll
 C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Library\bin\Debug\AnalizadorLexico.Library.pdb
 C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Library\obj\Debug\AnalizadorLexico.Library.pdb
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Library\bin\Debug\AnalizadorLexico.Library.dll
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Library\bin\Debug\AnalizadorLexico.Library.pdb
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Library\obj\Debug\AnalizadorLexico.Library.csprojResolveAssemblyReference.cache
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Library\obj\Debug\AnalizadorLexico.Library.dll
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Library\obj\Debug\AnalizadorLexico.Library.pdb

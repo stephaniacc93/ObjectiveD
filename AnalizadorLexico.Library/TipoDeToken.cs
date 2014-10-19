@@ -22,7 +22,6 @@ namespace AnalizadorLexico.Library
         ParentesisFinal,
         For,
         Foreach,
-        Constante,
         PuntoComa,
         Menor,
         Mayor,
@@ -33,7 +32,8 @@ namespace AnalizadorLexico.Library
         LlaveInicial,
         LlaveFinal,
         Incremento,
-        Error
+        Error,
+        String
 
     }
 }

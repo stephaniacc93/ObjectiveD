@@ -13,18 +13,19 @@ namespace AnalizadorLexico.Library
         private char[] inputArray;
         private List<Input> inputs = new List<Input>();
         private int NoLinea = 0;
-        private char[] NUMEROS = "0123456789".ToCharArray();
+        private char[] LETRAS = "abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ".ToCharArray();
 
 
         public void EmpezarAnalizador()
         {
             inputs = new List<Input>();
+            i = 0;
             Console.WriteLine("Ingrese el codigo");
             
             string input = Console.ReadLine();
             inputArray = input.ToCharArray();
 
-            for (int j = 0; j <= inputArray.Count() - 1; j++)
+            for (int j = 0; j <= inputArray.Count() - 1; j++)   
             {
                 try
                 {
@@ -55,17 +56,17 @@ namespace AnalizadorLexico.Library
                 {
 
                 }
-
-                esWhile();
-                esIdentificador();
-                esElse();
-                esIf();
-                esElseIf();
-                esParentesisInicial();
-                esParentesisTerminal();
-                //esConstante();
-                esFor();
+                esEspacio();
+                //esWhile();
+                //esIdentificador();
+                //esElse();
+                //esIf();
+                //esElseIf();
+                //esParentesisInicial();
+                //esParentesisTerminal();
+                //esString();
                 esForeach();
+                esFor();
                 esPuntoYComa();
                 esOperadorValido();
                 esLlaveInicial();
@@ -76,9 +77,23 @@ namespace AnalizadorLexico.Library
 
             foreach (var inp in inputs)
             {
-                Console.WriteLine("[" + (int)inp.tipoDeToken + "] ");
+                Console.Write("[" + (int)inp.tipoDeToken + "] ");
             }
             Console.ReadLine();
+        }
+
+        private void esEspacio()
+        {
+            if (!endOfInput())
+                if (inputArray[i] == ' ')
+                    i++;
+        }
+
+        private bool endOfInput()
+        {
+            if (i >= inputArray.Length)
+                return true;
+            return false;
         }
 
         private bool esSaltoDeLinea()
@@ -319,47 +334,57 @@ namespace AnalizadorLexico.Library
             return false;
         }
 
-        //private bool esConstante()
-        //{
-        //    try
-        //    {
-        //        string constante = String.Empty;
-        //        if (inputArray[i].ToString().IndexOfAny(NUMEROS) >= 0)
-        //        {
-        //            do
-        //            {
-        //                constante += inputArray[i];
-        //                i++;
-        //            }
-        //            while (inputArray[i].ToString().IndexOfAny(NUMEROS) >= 0);
-        //            inputs.Add(new Input(TipoDeToken.Constante, constante, NoLinea));
-        //            return true;
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //    return false;
-        //}
-
-
-        private bool esFor()
+        private bool esString()
         {
             try
             {
-                if (inputArray.Count() > 3)
+                string constante = String.Empty;
+                if (inputArray[i] == '"')
                 {
-                    if (inputArray[i] == 'f' && inputArray[i + 1] == 'o' && inputArray[i + 2] == 'r')
+                    if (inputArray[i].ToString().IndexOfAny(LETRAS) >= 0)
                     {
-                        i += 3;
-                        inputs.Add(new Input(TipoDeToken.Foreach, "foreach", NoLinea));
-                        return true;
+                        do
+                        {
+                            constante += inputArray[i];
+                            i++;
+                        }
+                        while (inputArray[i].ToString().IndexOfAny(LETRAS) >= 0);
+                        if (inputArray[i] == '"')
+                        {
+                            i++;
+                            inputs.Add(new Input(TipoDeToken.String, constante, NoLinea));
+                            return true;
+                        }
                     }
                 }
             }
             catch (Exception)
             {
+            }
+            return false;
+        }
 
+
+        private bool esFor()
+        {
+            if (!endOfInput())
+            {
+                try
+                {
+                    if (inputArray.Count() >= 3)
+                    {
+                        if (inputArray[i] == 'f' && inputArray[i + 1] == 'o' && inputArray[i + 2] == 'r')
+                        {
+                            i += 3;
+                            inputs.Add(new Input(TipoDeToken.For, "for", NoLinea));
+                            return true;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
             }
             return false;
         }
@@ -367,23 +392,26 @@ namespace AnalizadorLexico.Library
 
         private bool esForeach()
         {
-            try
+            if (!endOfInput())
             {
-                if (inputArray.Count() > 7)
+                try
                 {
-                    if (inputArray[i] == 'f' && inputArray[i + 1] == 'o' && inputArray[i + 2] == 'r')
-                        if (inputArray[i + 3] == 'e' && inputArray[i + 4] == 'a' && inputArray[i + 5] == 'c' &&
-                            inputArray[i + 6] == 'h')
-                        {
-                            i += 7;
-                            inputs.Add(new Input(TipoDeToken.Foreach, "foreach", NoLinea));
-                            return true;
-                        }
+                    if (inputArray.Count() > 6)
+                    {
+                        if (inputArray[i] == 'f' && inputArray[i + 1] == 'o' && inputArray[i + 2] == 'r')
+                            if (inputArray[i + 3] == 'e' && inputArray[i + 4] == 'a' && inputArray[i + 5] == 'c' &&
+                                inputArray[i + 6] == 'h')
+                            {
+                                i += 7;
+                                inputs.Add(new Input(TipoDeToken.Foreach, "foreach", NoLinea));
+                                return true;
+                            }
+                    }
                 }
-            }
-            catch (Exception)
-            {
+                catch (Exception)
+                {
 
+                }
             }
             return false;
         }
@@ -391,19 +419,21 @@ namespace AnalizadorLexico.Library
 
         private bool esPuntoYComa()
         {
-            try
+            if (!endOfInput())
             {
-                if (inputArray[i] == ';')
+                try
                 {
-                    i++;
-                    inputs.Add(new Input(TipoDeToken.PuntoComa, ";", NoLinea));
-                    return true;
+                    if (inputArray[i] == ';')
+                    {
+                        i++;
+                        inputs.Add(new Input(TipoDeToken.PuntoComa, ";", NoLinea));
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
                 }
             }
-            catch (Exception)
-            {
-            }
-
             return false;
         }
 

@@ -6,3 +6,11 @@ C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Cons
 C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Console\obj\Debug\AnalizadorLexico.Console.csprojResolveAssemblyReference.cache
 C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Console\obj\Debug\AnalizadorLexico.Console.exe
 C:\Users\Stephania Cavadas\Desktop\AnalizadorLexico-master\AnalizadorLexico.Console\obj\Debug\AnalizadorLexico.Console.pdb
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Console\bin\Debug\AnalizadorLexico.Console.exe.config
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Console\bin\Debug\AnalizadorLexico.Console.exe
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Console\bin\Debug\AnalizadorLexico.Console.pdb
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Console\bin\Debug\AnalizadorLexico.Library.dll
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Console\bin\Debug\AnalizadorLexico.Library.pdb
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Console\obj\Debug\AnalizadorLexico.Console.csprojResolveAssemblyReference.cache
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Console\obj\Debug\AnalizadorLexico.Console.exe
+C:\Users\Jose\Documents\GitHub\AnalizadorLexico\AnalizadorLexico.Console\obj\Debug\AnalizadorLexico.Console.pdb
