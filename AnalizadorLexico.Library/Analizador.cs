@@ -62,17 +62,17 @@ namespace AnalizadorLexico.Library
                 //esElse();
                 //esIf();
                 //esElseIf();
-                //esParentesisInicial();
-                //esParentesisTerminal();
-                //esString();
+                esParentesisInicial();
+                esParentesisTerminal();
+                esString();
                 esForeach();
                 esFor();
                 esPuntoYComa();
-                esOperadorValido();
+                //esOperadorValido();
                 esLlaveInicial();
                 esLlaveTerminal();
                 esIncremento();
-                esSaltoDeLinea();
+                //esSaltoDeLinea();
             }
 
             foreach (var inp in inputs)
@@ -300,66 +300,75 @@ namespace AnalizadorLexico.Library
 
         private bool esParentesisInicial()
         {
-            try
+            if (!endOfInput())
             {
-                //aprueba si es parentesis si, si agregar input
-                if (inputArray[i] == '(')
+                try
                 {
-                    i++;
-                    inputs.Add(new Input(TipoDeToken.ParentesisInicial, "(", NoLinea));
-                    return true;
+                    if (inputArray[i] == '(')
+                    {
+                        i++;
+                        inputs.Add(new Input(TipoDeToken.ParentesisInicial, "(", NoLinea));
+                        return true;
+                    }
                 }
-            }
-            catch (Exception)
-            {
+                catch (Exception)
+                {
+                }
             }
             return false;
         }
 
         private bool esParentesisTerminal()
         {
-            try
+            if (!endOfInput())
             {
-                if (inputArray[i] == ')')
+                try
                 {
-                    i++;
-                    inputs.Add(new Input(TipoDeToken.ParentesisFinal, ")", NoLinea));
-                    return true;
+                    if (inputArray[i] == ')')
+                    {
+                        i++;
+                        inputs.Add(new Input(TipoDeToken.ParentesisFinal, ")", NoLinea));
+                        return true;
+                    }
                 }
-            }
-            catch (Exception)
-            {
+                catch (Exception)
+                {
 
+                }
             }
             return false;
         }
 
         private bool esString()
         {
-            try
+            if (!endOfInput())
             {
-                string constante = String.Empty;
-                if (inputArray[i] == '"')
+                try
                 {
-                    if (inputArray[i].ToString().IndexOfAny(LETRAS) >= 0)
+                    string constante = String.Empty;
+                    if (inputArray[i] == '"')
                     {
-                        do
+                        i++;
+                        if (char.IsLetter(inputArray[i]))
                         {
-                            constante += inputArray[i];
-                            i++;
-                        }
-                        while (inputArray[i].ToString().IndexOfAny(LETRAS) >= 0);
-                        if (inputArray[i] == '"')
-                        {
-                            i++;
-                            inputs.Add(new Input(TipoDeToken.String, constante, NoLinea));
-                            return true;
+                            do
+                            {
+                                constante += inputArray[i];
+                                i++;
+                            }
+                            while (char.IsLetter(inputArray[i]));
+                            if (inputArray[i] == '"')
+                            {
+                                i++;
+                                inputs.Add(new Input(TipoDeToken.String, constante, NoLinea));
+                                return true;
+                            }
                         }
                     }
                 }
-            }
-            catch (Exception)
-            {
+                catch (Exception)
+                {
+                }
             }
             return false;
         }
@@ -439,169 +448,186 @@ namespace AnalizadorLexico.Library
 
         private bool esMayor()
         {
-            try
+            if (!endOfInput())
             {
-                if (inputArray[i] == '>')
+                try
                 {
-                    i++;
-                    inputs.Add(new Input(TipoDeToken.Mayor, ">", NoLinea));
-                    return true;
+                    if (inputArray[i] == '>')
+                    {
+                        i++;
+                        inputs.Add(new Input(TipoDeToken.Mayor, ">", NoLinea));
+                        return true;
+                    }
                 }
-            }
-            catch (Exception)
-            {
+                catch (Exception)
+                {
+                }
             }
             return false;
         }
         private bool esMenor()
         {
-            try
+            if (!endOfInput())
             {
-                if (inputArray[i] == '>')
+                try
                 {
-                    i++;
-                    inputs.Add(new Input(TipoDeToken.Menor, "<", NoLinea));
-                    return true;
+                    if (inputArray[i] == '>')
+                    {
+                        i++;
+                        inputs.Add(new Input(TipoDeToken.Menor, "<", NoLinea));
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
                 }
             }
-            catch (Exception)
-            {
-            }
-
             return false;
         }
 
         private bool esMenorIgual()
         {
-            try
+            if (!endOfInput())
             {
-                if (inputArray[i] == '<')
-                    if (inputArray[i + 1] == '=')
-                    {
-                        i += 2;
-                        inputs.Add(new Input(TipoDeToken.MenorIgual, "<=", NoLinea));
-                        return true;
-                    }
-            }
-            catch (Exception)
-            {
+                try
+                {
+                    if (inputArray[i] == '<')
+                        if (inputArray[i + 1] == '=')
+                        {
+                            i += 2;
+                            inputs.Add(new Input(TipoDeToken.MenorIgual, "<=", NoLinea));
+                            return true;
+                        }
+                }
+                catch (Exception)
+                {
 
+                }
             }
-
             return false;
         }
         private bool esMayorIgual()
         {
-            try
+            if (!endOfInput())
             {
-                if (inputArray[i] == '>')
-                    if (inputArray[i + 1] == '=')
-                    {
-                        i += 2;
-                        inputs.Add(new Input(TipoDeToken.MayorIgual, ">=", NoLinea));
-                        return true;
-                    }
+                try
+                {
+                    if (inputArray[i] == '>')
+                        if (inputArray[i + 1] == '=')
+                        {
+                            i += 2;
+                            inputs.Add(new Input(TipoDeToken.MayorIgual, ">=", NoLinea));
+                            return true;
+                        }
+                }
+                catch (Exception)
+                {
+                }
             }
-            catch (Exception)
-            {
-            }
-
             return false;
         }
         private bool esDiferente()
         {
-            try
+            if (!endOfInput())
             {
-
-                if (inputArray[i] == '!')
-                    if (inputArray[i + 1] == '=')
-                    {
-                        i += 2;
-                        inputs.Add(new Input(TipoDeToken.Diferente, "!=", NoLinea));
-                        return true;
-                    }
+                try
+                {
+                    if (inputArray[i] == '!')
+                        if (inputArray[i + 1] == '=')
+                        {
+                            i += 2;
+                            inputs.Add(new Input(TipoDeToken.Diferente, "!=", NoLinea));
+                            return true;
+                        }
+                }
+                catch (Exception)
+                {
+                }
             }
-            catch (Exception)
-            {
-            }
-
             return false;
         }
 
         private bool esIgual()
         {
-            try
+            if (!endOfInput())
             {
-                if (inputArray[i + 1] == '=')
+                try
                 {
-                    i++;
-                    inputs.Add(new Input(TipoDeToken.Igual, "=", NoLinea));
-                    return true;
+                    if (inputArray[i + 1] == '=')
+                    {
+                        i++;
+                        inputs.Add(new Input(TipoDeToken.Igual, "=", NoLinea));
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
+
                 }
             }
-            catch (Exception)
-            {
-
-            }
-
             return false;
         }
 
         private bool esLlaveInicial()
         {
-            try
+            if (!endOfInput())
             {
-
-                if (inputArray[i] == '{')
+                try
                 {
-                    i++;
-                    inputs.Add(new Input(TipoDeToken.LlaveInicial, "{", NoLinea));
-                    return true;
+                    if (inputArray[i] == '{')
+                    {
+                        i++;
+                        inputs.Add(new Input(TipoDeToken.LlaveInicial, "{", NoLinea));
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
+
                 }
             }
-            catch (Exception)
-            {
-
-            }
-
             return false;
         }
 
         private bool esLlaveTerminal()
         {
-            try
+            if (!endOfInput())
             {
-                if (inputArray[i] == '}')
+                try
                 {
-                    i++;
-                    inputs.Add(new Input(TipoDeToken.LlaveFinal, "}", NoLinea));
-                    return true;
+                    if (inputArray[i] == '}')
+                    {
+                        i++;
+                        inputs.Add(new Input(TipoDeToken.LlaveFinal, "}", NoLinea));
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
                 }
             }
-            catch (Exception)
-            {
-            }
-
             return false;
         }
 
         private bool esIncremento()
         {
-            try
+            if (!endOfInput())
             {
-                if (inputArray[i] == '+')
-                    if (inputArray[i + 1] == '+')
-                    {
-                        i += 2;
-                        inputs.Add(new Input(TipoDeToken.Incremento, "++", NoLinea));
-                        return true;
-                    }
-            }
-            catch (Exception)
-            {
+                try
+                {
+                    if (inputArray[i] == '+')
+                        if (inputArray[i + 1] == '+')
+                        {
+                            i += 2;
+                            inputs.Add(new Input(TipoDeToken.Incremento, "++", NoLinea));
+                            return true;
+                        }
+                }
+                catch (Exception)
+                {
 
+                }
             }
-
             return false;
         }
 
