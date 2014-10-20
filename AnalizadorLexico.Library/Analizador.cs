@@ -12,7 +12,7 @@ namespace AnalizadorLexico.Library
         int i = 0;
         private char[] inputArray;
         private List<Input> inputs = new List<Input>();
-        private int NoLinea = 0;
+        private int NoLinea = 1;
         private char[] LETRAS = "abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ".ToCharArray();
 
 
@@ -21,33 +21,58 @@ namespace AnalizadorLexico.Library
             inputs = new List<Input>();
             i = 0;
             Console.WriteLine("Ingrese el codigo");
-            
+
             string input = Console.ReadLine();
             inputArray = input.ToCharArray();
 
-            for (int j = 0; j <= inputArray.Count() - 1; j++)   
+            for (int j = 0; j <= inputArray.Count() - 1; j++)
             {
                 try
                 {
+                    esEspacio();
+                    esWhile();
+                    esElseIf();
+                    esElse();
+                    esIf();
+                    esParentesisInicial();
+                    esParentesisTerminal();
+                    esString();
+                    esForeach();
+                    esFor();
+                    esPuntoYComa();
+                    esMenorIgual();
+                    esMayorIgual();
+                    esMenor();
+                    esMayor();
+                    esLlaveInicial();
+                    esLlaveTerminal();
+                    esIncremento();
+                    esIgual();
+                    esDiferente();
+                    esSaltoDeLinea();
+                    esIdentificador();
 
-                    if (esNumero())
+                    if (char.IsDigit(inputArray[i]))
                     {
-                        inputs.Add(new Input(TipoDeToken.Real, inputArray[i - 1].ToString(), NoLinea));
+                        i++;
+                        inputs.Add(new Input(TipoDeToken.Entero, inputArray[i - 1].ToString(), NoLinea));
                         if (inputArray[i] == '.')
                         {
                             i++;
-                            if (esNumero())
+                            if (char.IsDigit(inputArray[i]))
                             {
+                                i++;
                                 inputs.Add(new Input(TipoDeToken.Real, inputArray[i - 1].ToString(), NoLinea));
                             }
                             else if (inputArray[i] == '.')
                             {
-                                inputs.Add(new Input(TipoDeToken.Rango, inputArray[i - 1].ToString(), NoLinea));
+                                inputs.Add(new Input(TipoDeToken.Rango, inputArray[i].ToString(), NoLinea));
                                 i++;
                             }
                         }
-                        else if (esNumero())
+                        if (char.IsDigit(inputArray[i]))
                         {
+                            i++;
                             inputs.Add(new Input(TipoDeToken.Entero, inputArray[i - 1].ToString(), NoLinea));
                         }
                     }
@@ -56,23 +81,7 @@ namespace AnalizadorLexico.Library
                 {
 
                 }
-                esEspacio();
-                //esWhile();
-                //esIdentificador();
-                //esElse();
-                //esIf();
-                //esElseIf();
-                esParentesisInicial();
-                esParentesisTerminal();
-                esString();
-                esForeach();
-                esFor();
-                esPuntoYComa();
-                //esOperadorValido();
-                esLlaveInicial();
-                esLlaveTerminal();
-                esIncremento();
-                //esSaltoDeLinea();
+
             }
 
             foreach (var inp in inputs)
@@ -100,11 +109,15 @@ namespace AnalizadorLexico.Library
         {
             try
             {
-                if (inputArray[i].ToString() == "/" && (inputArray[i + 1].ToString() == "n" || inputArray[i + 1].ToString() == "t"))
+                if (!endOfInput())
                 {
-                    NoLinea++;
-                    i += 2;
-                    return true;
+                    if (inputArray[i].ToString() == "/" &&
+                        (inputArray[i + 1].ToString() == "n" || inputArray[i + 1].ToString() == "t"))
+                    {
+                        NoLinea++;
+                        i += 2;
+                        return true;
+                    }
                 }
             }
             catch (Exception)
@@ -113,62 +126,18 @@ namespace AnalizadorLexico.Library
             return false;
         }
 
-        //CAMBIAR: WHILE
         private bool esWhile()
         {
             try
             {
                 int esBlanco = 0;
-                if (inputArray.Count() > 5)
+                if (!endOfInput())
                 {
-                    if (
-                        (inputArray[i] + inputArray[i + 1] + inputArray[i + 2] + inputArray[i + 3] + inputArray[i + 4])
-                            .ToString().ToLower() == "while")
+                    if (inputArray[i] == 'w' && inputArray[i + 1] == 'h' && inputArray[i + 2] == 'i' && inputArray[i + 3] == 'l'&& inputArray[i + 4] == 'e')
                     {
-                        i += 4;
+                        i += 5;
                         inputs.Add(new Input(TipoDeToken.While, "while", NoLinea));
-                        //esBlanco =  esEspacioEnBlanco()
-                        if (esParentesisInicial() && esBlanco == 0)
-                        {
-                            i++;
-                            if (esIdentificador())
-                            {
-                                i++;
-                                //inputs.Add(new Input(TipoDeToken.Identificador,"", NoLinea));
-                                if (esOperadorValido())
-                                {
-                                    i++;
-                                    //inputs.Add(new Input(TipoDeToken.Operador, NoLinea));
-                                    //if (esConstante())
-                                    //{
-                                    //    i++;
-                                    //    //inputs.Add(new Input(TipoDeToken.Constante, NoLinea));
-                                    //    return true;
-                                    //}
-                                    //else
-                                    //{
-                                    //    //inputs.Add(new Input(TipoDeToken.Error, NoLinea));
-                                    //    return false;
-                                    //}
-                                }
-
-                                else
-                                {
-                                    //inputs.Add(new Input(TipoDeToken.Error, NoLinea));
-                                    return false;
-                                }
-                            }
-                            else
-                            {
-                                //inputs.Add(new Input(TipoDeToken.Error, NoLinea));
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            //inputs.Add(new Input(TipoDeToken.Error, NoLinea));
-                        }
-                        return false;
+                        return true;
                     }
                 }
             }
@@ -178,44 +147,101 @@ namespace AnalizadorLexico.Library
             return false;
         }
 
-        private bool esNumero()
-        {
-            try
-            {
 
-                if (char.IsDigit(inputArray[i]))
-                {
-                    i++;
-                    return true;
-                }
-            }
-            catch (Exception e)
-            {
-            }
-            return false;
-        }
+
+        //private bool esIdentificador()
+        //{
+        //    try
+        //    {
+
+        //        int empiezaIdentificador = i;
+        //        if (char.IsLetter(inputArray[i]))
+        //        {
+        //            string lexema = "";
+        //            lexema += inputArray[i].ToString();
+        //            i++;
+        //            if (esLetraODigito())
+        //            {
+        //                for (int x = empiezaIdentificador; x == i; x++)
+        //                {
+        //                    lexema += inputArray[x];
+        //                }
+        //                return true;
+        //            }
+        //            inputs.Add(new Input(TipoDeToken.Identificador, lexema, NoLinea));
+        //            return true;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //    }
+        //    return false;
+        //}
+
+        //private bool esIdentificador()
+        //{
+        //    try
+        //    {
+        //        if (!endOfInput())
+        //        {
+        //            int empiezaIdentificador = i;
+        //            if (char.IsLetter(inputArray[i]))
+        //            {
+        //                string lexema = "";
+        //                lexema += inputArray[i].ToString();
+        //                i++;
+        //                while (esLetraODigito())
+        //                {
+        //                    esLetraODigito();
+        //                }
+
+        //                for (int x = empiezaIdentificador; x == i; x++)
+        //                {
+        //                    lexema += inputArray[x].ToString();
+        //                }
+
+        //                inputs.Add(new Input(TipoDeToken.Identificador, lexema, NoLinea));
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //    }
+        //    return false;
+        //}
 
         private bool esIdentificador()
         {
             try
             {
-
-                int empiezaIdentificador = i;
-                if (char.IsLetter(inputArray[i]))
+                if (!endOfInput())
                 {
-                    string lexema = "";
-                    lexema += inputArray[i].ToString();
-                    i++;
-                    if (esLetraODigito())
+                    if (char.IsLetter(inputArray[i]))
                     {
-                        for (int x = empiezaIdentificador; x == i; x++)
+                        string lexema = "";
+                        lexema += inputArray[i].ToString();
+                        i++;
+
+                        while (char.IsLetterOrDigit(inputArray[i]) && !endOfInput())
                         {
-                            lexema += inputArray[x];
+                            lexema += inputArray[i];
+                            i++;
+
+                            if (endOfInput())
+                            {
+                                inputs.Add(new Input(TipoDeToken.Identificador, lexema, NoLinea));
+                                return true;
+                            }
+                            else if (!char.IsLetterOrDigit(inputArray[i]))
+                            {
+                                inputs.Add(new Input(TipoDeToken.Identificador, lexema, NoLinea));
+                                return true;
+                            }
                         }
+                        inputs.Add(new Input(TipoDeToken.Identificador, lexema, NoLinea));
                         return true;
                     }
-                    inputs.Add(new Input(TipoDeToken.Identificador, lexema, NoLinea));
-                    return true;
                 }
             }
             catch (Exception)
@@ -224,15 +250,18 @@ namespace AnalizadorLexico.Library
             return false;
         }
 
+
         private bool esLetraODigito()
         {
             try
             {
-                if (char.IsLetterOrDigit(inputArray[i]))
+                if (!endOfInput())
                 {
-                    i++;
-                    esLetraODigito();
-                    return true;
+                    if (char.IsLetterOrDigit(inputArray[i]))
+                    {
+                        i++;
+                        return true;
+                    }
                 }
             }
             catch (Exception)
@@ -243,57 +272,69 @@ namespace AnalizadorLexico.Library
 
         private bool esElse()
         {
-            try
+            if (!endOfInput())
             {
-                if (inputArray.Count() > 4)
+                try
                 {
-                    if (inputArray[i] == 'e' && inputArray[i + 1] == 'l' && inputArray[i + 2] == 's' &&
-                        inputArray[i + 3] == 'e')
+                    if (inputArray.Count() > 3)
                     {
-                        i += 4;
-                        inputs.Add(new Input(TipoDeToken.Else, "else", NoLinea));
-                        return true;
+                        if (inputArray[i] == 'e' && inputArray[i + 1] == 'l' && inputArray[i + 2] == 's' &&
+                            inputArray[i + 3] == 'e')
+                        {
+                            i += 4;
+                            inputs.Add(new Input(TipoDeToken.Else, "else", NoLinea));
+                            return true;
+                        }
                     }
                 }
-            }
-            catch (Exception)
-            {
+                catch (Exception)
+                {
+                }
             }
             return false;
         }
 
         private bool esIf()
         {
-            try
+            if (!endOfInput())
             {
-                if (inputArray.Count() > 2)
+                try
                 {
-                    if (inputArray[i] == 'i' && inputArray[i + 1] == 'f')
+                    if (inputArray.Count() > 1)
                     {
-                        i += 2;
-                        inputs.Add(new Input(TipoDeToken.If, "if", NoLinea));
-                        return true;
+                        if (inputArray[i] == 'i' && inputArray[i + 1] == 'f')
+                        {
+                            i += 2;
+                            inputs.Add(new Input(TipoDeToken.If, "if", NoLinea));
+                            return true;
+                        }
                     }
                 }
-            }
-            catch (Exception)
-            {
+                catch (Exception)
+                {
+                }
             }
             return false;
         }
 
         private bool esElseIf()
         {
-            try
+            if (!endOfInput())
             {
-                if (esElse() && esIf())
+                try
                 {
-                    inputs.Add(new Input(TipoDeToken.Elseif, "else if", NoLinea));
-                    return true;
+                    if (inputArray[i] == 'e' && inputArray[i + 1] == 'l' && inputArray[i + 2] == 's' &&
+                            inputArray[i + 3] == 'e' && inputArray[i + 4] == ' ' && inputArray[i + 5] == 'i' &&
+                            inputArray[i + 6] == 'f')
+                    {
+                        i += 7;
+                        inputs.Add(new Input(TipoDeToken.Elseif, "else if", NoLinea));
+                        return true;
+                    }
                 }
-            }
-            catch (Exception)
-            {
+                catch (Exception)
+                {
+                }
             }
             return false;
         }
@@ -471,7 +512,7 @@ namespace AnalizadorLexico.Library
             {
                 try
                 {
-                    if (inputArray[i] == '>')
+                    if (inputArray[i] == '<')
                     {
                         i++;
                         inputs.Add(new Input(TipoDeToken.Menor, "<", NoLinea));
@@ -553,7 +594,7 @@ namespace AnalizadorLexico.Library
             {
                 try
                 {
-                    if (inputArray[i + 1] == '=')
+                    if (inputArray[i] == '=')
                     {
                         i++;
                         inputs.Add(new Input(TipoDeToken.Igual, "=", NoLinea));
@@ -631,22 +672,22 @@ namespace AnalizadorLexico.Library
             return false;
         }
 
-        private bool esOperadorValido()
-        {
-            try
-            {
-                bool response = false;
-                if (esMayorIgual())
-                {
-                    return true;
-                    //de esto todavia falta
-                }
-            }
-            catch (Exception)
-            {
-            }
-            return false;
-        }
+        /* private bool esOperadorValido()
+         {
+             try
+             {
+                 bool response = false;
+                 if (esMayorIgual())
+                 {
+                     return true;
+                     //de esto todavia falta
+                 }
+             }
+             catch (Exception)
+             {
+             }
+             return false;
+         }*/
 
     }
 }
