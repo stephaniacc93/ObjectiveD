@@ -33,7 +33,10 @@ namespace AnalizadorLexico.Library
         LlaveFinal,
         Incremento,
         Error,
-        String
+        String,
+        IgualIgual,
+        Mas,
+        In
 
     }
 }
