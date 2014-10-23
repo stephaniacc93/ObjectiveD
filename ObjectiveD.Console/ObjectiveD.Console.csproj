@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D55822F3-E70A-40F0-9399-B1FE245D1730}</ProjectGuid>
+    <ProjectGuid>{D9A85F68-9299-4791-BFA7-879D02AEDC2B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AnalizadorLexico.Console</RootNamespace>
-    <AssemblyName>AnalizadorLexico.Console</AssemblyName>
+    <RootNamespace>ObjectiveD.Console</RootNamespace>
+    <AssemblyName>ObjectiveD.Console</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,9 +48,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AnalizadorLexico.Library\AnalizadorLexico.Library.csproj">
-      <Project>{3108171c-9d41-410d-85c3-89f2998afa36}</Project>
-      <Name>AnalizadorLexico.Library</Name>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObjectiveD.AnalizadorLexico\ObjectiveD.AnalizadorLexico.csproj">
+      <Project>{d2b7f059-8b39-4aa2-830c-c452128ef515}</Project>
+      <Name>ObjectiveD.AnalizadorLexico</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

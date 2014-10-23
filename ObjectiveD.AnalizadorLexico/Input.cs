@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnalizadorLexico.Library
+namespace ObjectiveD.AnalizadorLexico
 {
     public class Input
     {
@@ -16,7 +16,7 @@ namespace AnalizadorLexico.Library
         {
             this.tipoDeToken = tipoDeToken;
             Lexema = lexema;
-            Linea = linea;  
+            Linea = linea;
         }
     }
 }

@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AnalizadorLexico.Library;
+using ObjectiveD.AnalizadorLexico;
 
-namespace AnalizadorLexico.Console
+namespace ObjectiveD.Console
 {
     class Program
     {
-        static Analizador analizador = new Analizador();
-
         static void Main(string[] args)
         {
+            var analizador = new Analizador();
+
             while (true)
             {
                 analizador.EmpezarAnalizador();

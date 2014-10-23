@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnalizadorLexico.Library
+namespace ObjectiveD.AnalizadorLexico
 {
-    //ESTE ENUM ES DE PRUEBA, NO SE SI SE NECESITARA EN LA IMPLEMENTACION
     public enum TipoDeToken
     {
         Identificador,
@@ -32,11 +31,11 @@ namespace AnalizadorLexico.Library
         LlaveInicial,
         LlaveFinal,
         Incremento,
-        Error,
         String,
         IgualIgual,
         Mas,
-        In
+        In,
+        Error
 
     }
 }

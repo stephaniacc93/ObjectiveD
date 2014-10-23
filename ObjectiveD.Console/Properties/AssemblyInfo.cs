@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AnalizadorLexico.Console")]
+[assembly: AssemblyTitle("ObjectiveD.Console")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AnalizadorLexico.Console")]
+[assembly: AssemblyProduct("ObjectiveD.Console")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("61066e16-6561-4ebf-aa28-3ad4c87cf4b5")]
+[assembly: Guid("c32cbdce-1ea8-4016-ba26-036654db99be")]
 
 // Version information for an assembly consists of the following four values:
 //
