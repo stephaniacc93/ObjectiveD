@@ -21,6 +21,13 @@ namespace ObjectiveD.AnalizadorSintactico
                 try
                 {
                     esIf1();
+                    esIf2();
+                    esIf3();
+                    esIf4();
+                    esElse1();
+                    esElse2();
+                    esElse3();
+                    esElse4();
                 }
                 catch (Exception)
                 {
@@ -31,6 +38,37 @@ namespace ObjectiveD.AnalizadorSintactico
         }
 
         private bool esIf1()
+        {
+            return true;
+        }
+
+        private bool esIf2()
+        {
+            return true;
+        }
+        private bool esIf3()
+        {
+            return true;
+        }
+        private bool esIf4()
+        {
+            return true;
+        }
+
+        private bool esElse1()
+        {
+            return true;
+        }
+
+        private bool esElse2()
+        {
+            return true;
+        }
+        private bool esElse3()
+        {
+            return true;
+        }
+        private bool esElse4()
         {
             return true;
         }
