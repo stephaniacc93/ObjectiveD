@@ -10,10 +10,11 @@ namespace ObjectiveD.AnalizadorSintactico
     public class Analizador
     {
         private int i = 0;
+        private List<Input> ListaDeTokens; 
         public void EmpezarAnalizador()
         {
             AnalizadorLexico.Analizador analizadorLexico = new AnalizadorLexico.Analizador();
-            List<Input> ListaDeTokens = analizadorLexico.EmpezarAnalizador();
+            ListaDeTokens = analizadorLexico.EmpezarAnalizador();
 
             foreach (var listaDeToken in ListaDeTokens)
             {
