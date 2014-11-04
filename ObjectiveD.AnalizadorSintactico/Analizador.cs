@@ -10,8 +10,8 @@ namespace ObjectiveD.AnalizadorSintactico
     public class Analizador
     {
         private int i = 0;
-        private Input [] tokens; 
-        private List<TipoDeRegla> Reglas = new List<TipoDeRegla>(); 
+        private Input[] tokens;
+        private List<TipoDeRegla> Reglas = new List<TipoDeRegla>();
         public void EmpezarAnalizador()
         {
             AnalizadorLexico.Analizador analizadorLexico = new AnalizadorLexico.Analizador();
@@ -41,30 +41,79 @@ namespace ObjectiveD.AnalizadorSintactico
 
         private bool esIf1()
         {
-            if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
-                (tokens[1 + 2].tipoDeToken == TipoDeToken.Menor || tokens[1 + 2].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 2].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 2].tipoDeToken == TipoDeToken.MenorIgual)
-                && tokens[i + 3].tipoDeToken == TipoDeToken.Identificador &&
-                tokens[i + 4].tipoDeToken == TipoDeToken.ParentesisFinal)
+            if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial && tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
+                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
+                tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
-                i += 5;
+                i += 6;
                 Reglas.Add(TipoDeRegla.If1);
+                return true;
             }
-            return true;
+            return false;
         }
 
         private bool esIf2()
         {
-            return true;
+            if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial && tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
+                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                && (tokens[i + 4].tipoDeToken == TipoDeToken.Real || tokens[i + 4].tipoDeToken == TipoDeToken.Entero) &&
+                tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
+            {
+                i += 6;
+                Reglas.Add(TipoDeRegla.If2);
+                return true;
+            }
+            return false;
         }
         private bool esIf3()
         {
-            return true;
+            if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial && (tokens[i + 2].tipoDeToken == TipoDeToken.Real || tokens[i + 2].tipoDeToken == TipoDeToken.Entero) &&
+              (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
+               tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+               tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+              && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
+              tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
+            {
+                i += 6;
+                Reglas.Add(TipoDeRegla.If3);
+                return true;
+            }
+            return false;
         }
+
         private bool esIf4()
         {
-            return true;
+            if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial && (tokens[i + 2].tipoDeToken == TipoDeToken.Real || tokens[i + 2].tipoDeToken == TipoDeToken.Entero) &&
+                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                && (tokens[i + 4].tipoDeToken == TipoDeToken.Real || tokens[i + 4].tipoDeToken == TipoDeToken.Entero) &&
+                tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
+            {
+                i += 6;
+                Reglas.Add(TipoDeRegla.If4);
+                return true;
+            }
+            return false;
+        }
+
+        private bool esIf5()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial && tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
+                tokens[1 + 3].tipoDeToken == TipoDeToken.IgualIgual
+                && tokens[i + 4].tipoDeToken == TipoDeToken.String &&
+                tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
+            {
+                i += 6;
+                Reglas.Add(TipoDeRegla.If5);
+                return true;
+            }
+            return false;
         }
 
         private bool esElse1()

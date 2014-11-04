@@ -10,43 +10,49 @@ namespace ObjectiveD.AnalizadorSintactico
     {
         //if(identificador operador identificador) stephania
         If1,
-        //if(identificador operador variable) stephania
+        //if(identificador operador entero/real) stephania
         If2,
-        //if(variable operador identificador)   stephania
+        //if(entero/real operador identificador)   stephania
         If3,
-        //if(variable operador variable)    stephania
+        //if(entero/real operador entero/real)    stephania
         If4,
+        //if(identificador igualigual string) stephania
+        If5,
 
         //else(identificador operador identificador)   stephania
         Else1,
-        //else(identificador operador variable)    stephania
+        //else(identificador operador entero/real)    stephania
         Else2,
-        //else(variable operador identificador)     stephania
+        //else(entero/real operador identificador)     stephania
         Else3,
-        //else(variable operador variable)       stephania
+        //else(entero/real operador entero/real)       stephania
         Else4,
+        //else(identificador igualigual string) stephania
+        Else5,
 
         //elseif(identificador operador identificador)     sara
         Elseif1,
-        //elseif(identificador operador variable)   sara
+        //elseif(identificador operador entero/real)   sara
         Elseif2,
-        //elseif(variable operador identificador)    sara
+        //elseif(entero/real operador identificador)    sara
         Elseif3,
-        //elseif(variable operador variable)    sara
+        //elseif(entero/real operador entero/real)    sara
         Elseif4,
+        //elseif(identificador igualigual string) sara
+        ElseIf5,
 
         //while(identificador operador identificador)     sara
         While1,
-        //while(identificador operador variable)     sara
+        //while(identificador operador entero/real)     sara
         While2,
-        //while(variable operador identificador)    sara
+        //while(entero/real operador identificador)    sara
         While3,
-        //while(variable operador variable)   sara
+        //while(entero/real operador entero/real)   sara
         While4,
 
-        //for ( tipo de variable identificador operador variable; identificador operador variable; variable ++)   omar
+        //for ( tipo de variable identificador operador entero/real; identificador operador variable; variable ++)   omar
         For1,
-        //for ( tipo de variable identificador operador variable; identificador operador variable; variable--)   omar
+        //for ( tipo de variable identificador operador entero/real; identificador operador variable; variable--)   omar
         For2,
         //for (tipo de variable identificador operador identificador; identificador operador identificador; identificador++)    omar
         For3,
@@ -59,17 +65,17 @@ namespace ObjectiveD.AnalizadorSintactico
         //identificador = expresion   omar
         Asignacion,
 
-        //variable + variable       omar
+        //entero/real + entero/real       omar
         Expresion1,
-        //variable - variable     omar
+        //entero/real - entero/real     omar
         Expresion2,
-        //variable        jose
+        //entero/real        jose
         Expresion3,
         //identificador  jose
         Expresion4,
-        //variable + identificador   jose
+        //entero/real + identificador   jose
         Expresion5,
-        //variable - identifcador  jose
+        //entero/real - identifcador  jose
         Expresion6,
         //identificador + identificador    jose
         Expresion7,
