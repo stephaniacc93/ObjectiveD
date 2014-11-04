@@ -9,7 +9,6 @@ namespace ObjectiveD.AnalizadorLexico
     public enum TipoDeToken
     {
         Identificador,
-        Operador,
         Entero,
         Real,
         Rango,

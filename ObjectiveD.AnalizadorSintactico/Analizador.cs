@@ -10,15 +10,16 @@ namespace ObjectiveD.AnalizadorSintactico
     public class Analizador
     {
         private int i = 0;
-        private List<Input> ListaDeTokens; 
+        private Input [] tokens; 
+        private List<TipoDeRegla> Reglas = new List<TipoDeRegla>(); 
         public void EmpezarAnalizador()
         {
             AnalizadorLexico.Analizador analizadorLexico = new AnalizadorLexico.Analizador();
-            ListaDeTokens = analizadorLexico.EmpezarAnalizador();
+            tokens = analizadorLexico.EmpezarAnalizador().ToArray();
+            Reglas = new List<TipoDeRegla>();
 
-            foreach (var listaDeToken in ListaDeTokens)
+            while (i < tokens.Count())
             {
-
                 try
                 {
                     esIf1();
@@ -40,6 +41,16 @@ namespace ObjectiveD.AnalizadorSintactico
 
         private bool esIf1()
         {
+            if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
+                (tokens[1 + 2].tipoDeToken == TipoDeToken.Menor || tokens[1 + 2].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[1 + 2].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[1 + 2].tipoDeToken == TipoDeToken.MenorIgual)
+                && tokens[i + 3].tipoDeToken == TipoDeToken.Identificador &&
+                tokens[i + 4].tipoDeToken == TipoDeToken.ParentesisFinal)
+            {
+                i += 5;
+                Reglas.Add(TipoDeRegla.If1);
+            }
             return true;
         }
 
