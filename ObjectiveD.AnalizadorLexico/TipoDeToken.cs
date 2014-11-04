@@ -30,12 +30,16 @@ namespace ObjectiveD.AnalizadorLexico
         Igual,
         LlaveInicial,
         LlaveFinal,
-        Incremento,
+        Incremento, 
+        Decremento,
         String,
         IgualIgual,
         Mas,
+        Menos,
         In,
-        Error
-
+        Error,
+        Integer,
+        Double,
+        TipoString
     }
 }

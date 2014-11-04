@@ -15,12 +15,11 @@ namespace ObjectiveD.AnalizadorLexico
         private char[] LETRAS = "abcdefghijklmnopqrstuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ".ToCharArray();
         private string valorNumerico = "";
 
-        public void EmpezarAnalizador()
+        public List<Input> EmpezarAnalizador()
         {
             inputs = new List<Input>();
             i = 0;
             Console.WriteLine("Ingrese el codigo");
-
             string input = Console.ReadLine();
             inputArray = input.ToCharArray();
 
@@ -37,6 +36,9 @@ namespace ObjectiveD.AnalizadorLexico
                     esParentesisInicial();
                     esParentesisTerminal();
                     esString();
+                    esInteger();
+                    esTipoString();
+                    esDouble();
                     esForeach();
                     esFor();
                     esPuntoYComa();
@@ -45,10 +47,12 @@ namespace ObjectiveD.AnalizadorLexico
                     esMenor();
                     esMayor();
                     esIgualIgual();
+                    esIncremento();
+                    esDecremento();
                     esMas();
+                    esMenos();
                     esLlaveInicial();
                     esLlaveTerminal();
-                    esIncremento();
                     esIgual();
                     esDiferente();
                     esSaltoDeLinea();
@@ -66,11 +70,7 @@ namespace ObjectiveD.AnalizadorLexico
 
             }
 
-            foreach (var inp in inputs)
-            {
-                Console.Write("[" + (int)inp.tipoDeToken + "]");
-            }
-            Console.ReadLine();
+            return inputs;
         }
 
 
@@ -206,68 +206,6 @@ namespace ObjectiveD.AnalizadorLexico
         }
 
 
-        //private bool esIdentificador()
-        //{
-        //    try
-        //    {
-
-        //        int empiezaIdentificador = i;
-        //        if (char.IsLetter(inputArray[i]))
-        //        {
-        //            string lexema = "";
-        //            lexema += inputArray[i].ToString();
-        //            i++;
-        //            if (esLetraODigito())
-        //            {
-        //                for (int x = empiezaIdentificador; x == i; x++)
-        //                {
-        //                    lexema += inputArray[x];
-        //                }
-        //                return true;
-        //            }
-        //            inputs.Add(new Input(TipoDeToken.Identificador, lexema, NoLinea));
-        //            return true;
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //    return false;
-        //}
-
-        //private bool esIdentificador()
-        //{
-        //    try
-        //    {
-        //        if (!endOfInput())
-        //        {
-        //            int empiezaIdentificador = i;
-        //            if (char.IsLetter(inputArray[i]))
-        //            {
-        //                string lexema = "";
-        //                lexema += inputArray[i].ToString();
-        //                i++;
-        //                while (esLetraODigito())
-        //                {
-        //                    esLetraODigito();
-        //                }
-
-        //                for (int x = empiezaIdentificador; x == i; x++)
-        //                {
-        //                    lexema += inputArray[x].ToString();
-        //                }
-
-        //                inputs.Add(new Input(TipoDeToken.Identificador, lexema, NoLinea));
-        //                return true;
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //    return false;
-        //}
-
         private bool esIdentificador()
         {
             string lexema = "";
@@ -388,7 +326,7 @@ namespace ObjectiveD.AnalizadorLexico
                 {
                     if (inputArray[i] == '+')
                     {
-                        i += 2;
+                        i += 1;
                         inputs.Add(new Input(TipoDeToken.Mas, "+", NoLinea));
                         return true;
                     }
@@ -400,6 +338,45 @@ namespace ObjectiveD.AnalizadorLexico
             return false;
         }
 
+        public bool esMenos()
+        {
+            if (!endOfInput())
+            {
+                try
+                {
+                    if (inputArray[i] == '-')
+                    {
+                        i += 1;
+                        inputs.Add(new Input(TipoDeToken.Menos, "-", NoLinea));
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return false;
+        }
+
+        public bool esDecremento()
+        {
+            if (!endOfInput())
+            {
+                try
+                {
+                    if (inputArray[i] == '-' && inputArray[i + 1] == '-')
+                    {
+                        i += 2;
+                        inputs.Add(new Input(TipoDeToken.Decremento, "--", NoLinea));
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return false;
+        }
         private bool esElse()
         {
             if (!endOfInput())
@@ -569,7 +546,78 @@ namespace ObjectiveD.AnalizadorLexico
             return false;
         }
 
+        private bool esInteger()
+        {
+            if (!endOfInput())
+            {
+                try
+                {
+                    if (inputArray.Count() >= 3)
+                    {
+                        if (inputArray[i] == 'i' && inputArray[i + 1] == 'n' && inputArray[i + 2] == 't')
+                        {
+                            i += 3;
+                            inputs.Add(new Input(TipoDeToken.Integer, "int", NoLinea));
+                            return true;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
 
+                }
+            }
+            return false;
+        }
+
+
+        private bool esDouble()
+        {
+            if (!endOfInput())
+            {
+                try
+                {
+                    if (inputArray.Count() >= 3)
+                    {
+                        if (inputArray[i] == 'd' && inputArray[i + 1] == 'o' && inputArray[i + 2] == 'u' && inputArray[i + 3] == 'b' && inputArray[i + 4] == 'l' && inputArray[i + 5] == 'e')
+                        {
+                            i += 6;
+                            inputs.Add(new Input(TipoDeToken.Double, "double", NoLinea));
+                            return true;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            return false;
+        }
+
+        private bool esTipoString()
+        {
+            if (!endOfInput())
+            {
+                try
+                {
+                    if (inputArray.Count() >= 3)
+                    {
+                        if (inputArray[i] == 's' && inputArray[i + 1] == 't' && inputArray[i + 2] == 'r' && inputArray[i + 3] == 'i' && inputArray[i + 4] == 'n' && inputArray[i + 5] == 'g')
+                        {
+                            i += 6;
+                            inputs.Add(new Input(TipoDeToken.TipoString, "string", NoLinea));
+                            return true;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            return false;
+        }
         private bool esForeach()
         {
             if (!endOfInput())
@@ -802,22 +850,6 @@ namespace ObjectiveD.AnalizadorLexico
             return false;
         }
 
-        /* private bool esOperadorValido()
-         {
-             try
-             {
-                 bool response = false;
-                 if (esMayorIgual())
-                 {
-                     return true;
-                     //de esto todavia falta
-                 }
-             }
-             catch (Exception)
-             {
-             }
-             return false;
-         }*/
 
     }
 }

@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D9A85F68-9299-4791-BFA7-879D02AEDC2B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{B35FA0BD-5F6A-4F85-8C0C-1D7D934DEA58}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ObjectiveD.Console</RootNamespace>
-    <AssemblyName>ObjectiveD.Console</AssemblyName>
+    <RootNamespace>ObjectiveD.AnalizadorSintactico</RootNamespace>
+    <AssemblyName>ObjectiveD.AnalizadorSintactico</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,19 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Analizador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoDeRegla.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ObjectiveD.AnalizadorSintactico\ObjectiveD.AnalizadorSintactico.csproj">
-      <Project>{b35fa0bd-5f6a-4f85-8c0c-1d7d934dea58}</Project>
-      <Name>ObjectiveD.AnalizadorSintactico</Name>
+    <ProjectReference Include="..\ObjectiveD.AnalizadorLexico\ObjectiveD.AnalizadorLexico.csproj">
+      <Project>{d2b7f059-8b39-4aa2-830c-c452128ef515}</Project>
+      <Name>ObjectiveD.AnalizadorLexico</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
