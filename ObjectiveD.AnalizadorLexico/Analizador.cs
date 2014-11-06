@@ -27,6 +27,7 @@ namespace ObjectiveD.AnalizadorLexico
             {
                 try
                 {
+
                     esEspacio();
                     esWhile();
                     esElseIf();

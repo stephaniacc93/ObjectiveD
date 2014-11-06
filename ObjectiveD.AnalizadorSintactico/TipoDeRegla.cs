@@ -50,16 +50,16 @@ namespace ObjectiveD.AnalizadorSintactico
         //while(entero/real operador entero/real)  -ya
         While4,
 
-        // REVISAR for ( tipo de variable identificador igual entero/real; identificador operador variable; identificador ++)
+        // for ( tipo de variable identificador igual entero; identificador operador variable; identificador ++)     -ya
         For1,
-        // REVISAR for ( tipo de variable identificador igual entero/real; identificador operador variable; identificador--)
+        //  for ( tipo de variable identificador igual entero; identificador operador variable; identificador--)    -ya
         For2,
-        // REVISAR for (tipo de variable identificador igual identificador; identificador operador identificador; identificador++)
+        //  for (tipo de variable identificador igual identificador; identificador operador identificador; identificador++)     -ya
         For3,
-        // REVISAR for (tipo de variable identificador igual identificador; identificador operador identificador; identificador--)
+        //  for (tipo de variable identificador igual identificador; identificador operador identificador; identificador--)      -ya
         For4,
 
-        //foreach(tipo de variable identificador in identificador)   omar
+        //foreach(tipo de variable identificador in identificador)   -ya
         Foreach,
 
         //identificador = expresion   omar
