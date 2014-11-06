@@ -8,55 +8,55 @@ namespace ObjectiveD.AnalizadorSintactico
 {
     public enum TipoDeRegla
     {
-        //if(identificador operador identificador) stephania
+        //if(identificador operador identificador) -ya
         If1,
-        //if(identificador operador entero/real) stephania
+        //if(identificador operador entero/real) -ya
         If2,
-        //if(entero/real operador identificador)   stephania
+        //if(entero/real operador identificador)   -ya
         If3,
-        //if(entero/real operador entero/real)    stephania
+        //if(entero/real operador entero/real)    -ya
         If4,
-        //if(identificador igualigual string) stephania
+        //if(identificador igualigual string) -ya
         If5,
 
-        //else(identificador operador identificador)   stephania
+        //else(identificador operador identificador)   -ya
         Else1,
-        //else(identificador operador entero/real)    stephania
+        //else(identificador operador entero/real)    -ya
         Else2,
-        //else(entero/real operador identificador)     stephania
+        //else(entero/real operador identificador)     -ya
         Else3,
-        //else(entero/real operador entero/real)       stephania
+        //else(entero/real operador entero/real)       -ya
         Else4,
-        //else(identificador igualigual string) stephania
+        //else(identificador igualigual string) -ya
         Else5,
 
-        //elseif(identificador operador identificador)     sara
+        //elseif(identificador operador identificador)     -ya
         Elseif1,
-        //elseif(identificador operador entero/real)   sara
+        //elseif(identificador operador entero/real)   -ya
         Elseif2,
-        //elseif(entero/real operador identificador)    sara
+        //elseif(entero/real operador identificador)    -ya
         Elseif3,
-        //elseif(entero/real operador entero/real)    sara
+        //elseif(entero/real operador entero/real)    -ya
         Elseif4,
-        //elseif(identificador igualigual string) sara
+        //elseif(identificador igualigual string) -ya
         ElseIf5,
 
-        //while(identificador operador identificador)     sara
+        //while(identificador operador identificador)     -ya
         While1,
-        //while(identificador operador entero/real)     sara
+        //while(identificador operador entero/real)     -ya
         While2,
-        //while(entero/real operador identificador)    sara
+        //while(entero/real operador identificador)    -ya
         While3,
-        //while(entero/real operador entero/real)   sara
+        //while(entero/real operador entero/real)  -ya
         While4,
 
-        //for ( tipo de variable identificador operador entero/real; identificador operador variable; variable ++)   omar
+        // REVISAR for ( tipo de variable identificador igual entero/real; identificador operador variable; identificador ++)
         For1,
-        //for ( tipo de variable identificador operador entero/real; identificador operador variable; variable--)   omar
+        // REVISAR for ( tipo de variable identificador igual entero/real; identificador operador variable; identificador--)
         For2,
-        //for (tipo de variable identificador operador identificador; identificador operador identificador; identificador++)    omar
+        // REVISAR for (tipo de variable identificador igual identificador; identificador operador identificador; identificador++)
         For3,
-        //for (tipo de variable identificador operador identificador; identificador operador identificador; identificador--)     omar
+        // REVISAR for (tipo de variable identificador igual identificador; identificador operador identificador; identificador--)
         For4,
 
         //foreach(tipo de variable identificador in identificador)   omar
@@ -69,9 +69,9 @@ namespace ObjectiveD.AnalizadorSintactico
         Expresion1,
         //entero/real - entero/real     omar
         Expresion2,
-        //entero/real        jose
+        //entero/real        omar
         Expresion3,
-        //identificador  jose
+        //identificador  omar
         Expresion4,
         //entero/real + identificador   jose
         Expresion5,
