@@ -602,5 +602,81 @@ namespace ObjectiveD.AnalizadorSintactico
             }
             return false;
         }
+
+        private bool esExpresion5()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.Entero || tokens[i].tipoDeToken == TipoDeToken.Real)
+                if(tokens[i + 1].tipoDeToken == TipoDeToken.Mas)
+                    if (tokens[i + 2].tipoDeToken == TipoDeToken.Identificador)
+                    {
+                        i += 3;
+                        Reglas.Add(TipoDeRegla.Expresion5);
+                        return true;
+                    }
+            return false;
+        }
+
+        private bool esExpresion6()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.Entero || tokens[i].tipoDeToken == TipoDeToken.Real)
+                if (tokens[i + 1].tipoDeToken == TipoDeToken.Menos)
+                    if (tokens[i + 2].tipoDeToken == TipoDeToken.Identificador)
+                    {
+                        i += 3;
+                        Reglas.Add(TipoDeRegla.Expresion6);
+                        return true;
+                    }
+            return false;
+        }
+
+        private bool esExpresion7()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.Identificador)
+                if (tokens[i + 1].tipoDeToken == TipoDeToken.Mas)
+                    if (tokens[i + 2].tipoDeToken == TipoDeToken.Identificador)
+                    {
+                        i += 3;
+                        Reglas.Add(TipoDeRegla.Expresion7);
+                        return true;
+                    }
+            return false;
+        }
+
+        private bool esExpresion8()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.Identificador)
+                if (tokens[i + 1].tipoDeToken == TipoDeToken.Menos)
+                    if (tokens[i + 2].tipoDeToken == TipoDeToken.Identificador)
+                    {
+                        i += 3;
+                        Reglas.Add(TipoDeRegla.Expresion8);
+                        return true;
+                    }
+            return false;
+        }
+
+        private bool esExpresion9()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.Identificador)
+                if (tokens[i + 1].tipoDeToken == TipoDeToken.Incremento)
+                {
+                    i += 2;
+                    Reglas.Add(TipoDeRegla.Expresion9);
+                    return true;
+                }
+            return false;
+        }
+
+        private bool esExpresion10()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.Identificador)
+                if (tokens[i + 1].tipoDeToken == TipoDeToken.Decremento)
+                {
+                    i += 2;
+                    Reglas.Add(TipoDeRegla.Expresion10);
+                    return true;
+                }
+            return false;
+        }
     }
 }
