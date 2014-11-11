@@ -536,5 +536,71 @@ namespace ObjectiveD.AnalizadorSintactico
             return false;
 
         }
+
+        /*private bool esAsignacion()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.Identificador
+                && tokens[i+1].tipoDeToken == TipoDeToken.Igual
+                && tokens[i+2].tipoDeToken == TipoDeToken.expre)
+            {
+
+            }
+        }*/
+
+        private bool esExpresion1()
+        {
+            if(tokens[i].tipoDeToken == TipoDeToken.Entero || tokens[i].tipoDeToken == TipoDeToken.Real)
+            {
+                if(tokens[i+1].tipoDeToken == TipoDeToken.Mas)
+                {
+                    if(tokens[i+2].tipoDeToken == TipoDeToken.Entero || tokens[i+2].tipoDeToken == TipoDeToken.Real)
+                    {
+                        i += 3;
+                        Reglas.Add(TipoDeRegla.Expresion1);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool esExpresion2()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.Entero || tokens[i].tipoDeToken == TipoDeToken.Real)
+            {
+                if (tokens[i + 1].tipoDeToken == TipoDeToken.Menos)
+                {
+                    if (tokens[i + 2].tipoDeToken == TipoDeToken.Entero || tokens[i + 2].tipoDeToken == TipoDeToken.Real)
+                    {
+                        i += 3;
+                        Reglas.Add(TipoDeRegla.Expresion2);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool esExpresion3()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.Entero || tokens[i].tipoDeToken == TipoDeToken.Real)
+            {
+                i++;
+                Reglas.Add(TipoDeRegla.Expresion3);
+                return true;
+            }
+            return false;
+        }
+
+        private bool esExpresion4()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.Identificador)
+            {
+                i++;
+                Reglas.Add(TipoDeRegla.Expresion4);
+                return true;
+            }
+            return false;
+        }
     }
 }

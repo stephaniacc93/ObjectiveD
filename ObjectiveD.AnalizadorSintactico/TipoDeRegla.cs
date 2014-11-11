@@ -62,16 +62,16 @@ namespace ObjectiveD.AnalizadorSintactico
         //foreach(tipo de variable identificador in identificador)   -ya
         Foreach,
 
-        //identificador = expresion   omar
+        //identificador = expresion   omar ? pendiente por falta de saber que es expresion
         Asignacion,
 
-        //entero/real + entero/real       omar
+        //entero/real + entero/real       ya
         Expresion1,
-        //entero/real - entero/real     omar
+        //entero/real - entero/real     ya
         Expresion2,
-        //entero/real        omar
+        //entero/real        ya
         Expresion3,
-        //identificador  omar
+        //identificador  ya
         Expresion4,
         //entero/real + identificador   jose
         Expresion5,
