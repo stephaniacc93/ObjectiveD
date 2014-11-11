@@ -13,40 +13,64 @@ namespace ObjectiveD.AnalizadorSintactico
         private Input[] tokens;
         private List<TipoDeRegla> Reglas = new List<TipoDeRegla>();
 
-        public void EmpezarAnalizador()
+        public List<TipoDeRegla> EmpezarAnalizador()
         {
             AnalizadorLexico.Analizador analizadorLexico = new AnalizadorLexico.Analizador();
             tokens = analizadorLexico.EmpezarAnalizador().ToArray();
             Reglas = new List<TipoDeRegla>();
 
-            while (i < tokens.Count())
+            for (i = 0; i < tokens.Count(); )
             {
                 try
                 {
-                    esIf1();
-                    esIf2();
-                    esIf3();
-                    esIf4();
-                    esIf5();
-                    esElse1();
-                    esElse2();
-                    esElse3();
-                    esElse4();
-                    esElse5();
-                    esElseIf1();
-                    esElseIf2();
-                    esElseIf3();
-                    esElseIf4();
-                    esElseIf5();
-                    esWhile1();
-                    esWhile2();
-                    esWhile3();
-                    esWhile4();
-                    esFor1();
-                    esFor2();
-                    esFor3();
-                    esFor4();
-                    esForeach();
+                    if (esIf1())
+                        continue;
+                    if (esIf2())
+                        continue;
+                    if (esIf3())
+                        continue;
+                    if (esIf4())
+                        continue;
+                    if (esIf5())
+                        continue;
+                    if (esElse1())
+                        continue;
+                    if (esElse2())
+                        continue;
+                    if (esElse3())
+                        continue;
+                    if (esElse4())
+                        continue;
+                    if (esElse5())
+                        continue;
+                    if (esElseIf1())
+                        continue;
+                    if (esElseIf2())
+                        continue;
+                    if (esElseIf3())
+                        continue;
+                    if (esElseIf4())
+                        continue;
+                    if (esElseIf5())
+                        continue;
+                    if (esWhile1())
+                        continue;
+                    if (esWhile2())
+                        continue;
+                    if (esWhile3())
+                        continue;
+                    if (esWhile4())
+                        continue;
+                    if (esFor1())
+                        continue;
+                    if (esFor2())
+                        continue;
+                    if (esFor3())
+                        continue;
+                    if (esFor4())
+                        continue;
+                    if (esForeach())
+                        continue;
 
                 }
                 catch (Exception)
@@ -55,15 +79,17 @@ namespace ObjectiveD.AnalizadorSintactico
                 }
             }
 
+            return Reglas;
+
         }
 
         private bool esIf1()
         {
             if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -78,9 +104,9 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && (tokens[i + 4].tipoDeToken == TipoDeToken.Real || tokens[i + 4].tipoDeToken == TipoDeToken.Entero) &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -95,9 +121,9 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 (tokens[i + 2].tipoDeToken == TipoDeToken.Real || tokens[i + 2].tipoDeToken == TipoDeToken.Entero) &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -112,9 +138,9 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 (tokens[i + 2].tipoDeToken == TipoDeToken.Real || tokens[i + 2].tipoDeToken == TipoDeToken.Entero) &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && (tokens[i + 4].tipoDeToken == TipoDeToken.Real || tokens[i + 4].tipoDeToken == TipoDeToken.Entero) &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -129,7 +155,7 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
-                tokens[1 + 3].tipoDeToken == TipoDeToken.IgualIgual
+                tokens[i + 3].tipoDeToken == TipoDeToken.IgualIgual
                 && tokens[i + 4].tipoDeToken == TipoDeToken.String &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -144,9 +170,9 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.Else && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -161,9 +187,9 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.Else && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && (tokens[i + 4].tipoDeToken == TipoDeToken.Real || tokens[i + 4].tipoDeToken == TipoDeToken.Entero) &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -178,9 +204,9 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.Else && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 (tokens[i + 2].tipoDeToken == TipoDeToken.Real || tokens[i + 2].tipoDeToken == TipoDeToken.Entero) &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -195,9 +221,9 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.Else && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 (tokens[i + 2].tipoDeToken == TipoDeToken.Real || tokens[i + 2].tipoDeToken == TipoDeToken.Entero) &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && (tokens[i + 4].tipoDeToken == TipoDeToken.Real || tokens[i + 4].tipoDeToken == TipoDeToken.Entero) &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -212,7 +238,7 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.Else && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
-                tokens[1 + 3].tipoDeToken == TipoDeToken.IgualIgual
+                tokens[i + 3].tipoDeToken == TipoDeToken.IgualIgual
                 && tokens[i + 4].tipoDeToken == TipoDeToken.String &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -228,9 +254,9 @@ namespace ObjectiveD.AnalizadorSintactico
             if (tokens[i].tipoDeToken == TipoDeToken.Elseif &&
                 tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -246,9 +272,9 @@ namespace ObjectiveD.AnalizadorSintactico
             if (tokens[i].tipoDeToken == TipoDeToken.Elseif &&
                 tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && (tokens[i + 4].tipoDeToken == TipoDeToken.Real || tokens[i + 4].tipoDeToken == TipoDeToken.Entero) &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -264,9 +290,9 @@ namespace ObjectiveD.AnalizadorSintactico
             if (tokens[i].tipoDeToken == TipoDeToken.Elseif &&
                 tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 (tokens[i + 2].tipoDeToken == TipoDeToken.Real || tokens[i + 2].tipoDeToken == TipoDeToken.Entero) &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -282,9 +308,9 @@ namespace ObjectiveD.AnalizadorSintactico
             if (tokens[i].tipoDeToken == TipoDeToken.Elseif &&
                 tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 (tokens[i + 2].tipoDeToken == TipoDeToken.Real || tokens[i + 2].tipoDeToken == TipoDeToken.Entero) &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && (tokens[i + 4].tipoDeToken == TipoDeToken.Real || tokens[i + 4].tipoDeToken == TipoDeToken.Entero) &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -300,7 +326,7 @@ namespace ObjectiveD.AnalizadorSintactico
             if (tokens[i].tipoDeToken == TipoDeToken.Elseif &&
                 tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
-                tokens[1 + 3].tipoDeToken == TipoDeToken.IgualIgual
+                tokens[i + 3].tipoDeToken == TipoDeToken.IgualIgual
                 && tokens[i + 4].tipoDeToken == TipoDeToken.String &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -315,9 +341,9 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.While && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -332,9 +358,9 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.While && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && (tokens[i + 4].tipoDeToken == TipoDeToken.Real || tokens[i + 4].tipoDeToken == TipoDeToken.Entero) &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -349,9 +375,9 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.While && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 (tokens[i + 2].tipoDeToken == TipoDeToken.Real || tokens[i + 2].tipoDeToken == TipoDeToken.Entero) &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -366,9 +392,9 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.While && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 (tokens[i + 2].tipoDeToken == TipoDeToken.Real || tokens[i + 2].tipoDeToken == TipoDeToken.Entero) &&
-                (tokens[1 + 3].tipoDeToken == TipoDeToken.Menor || tokens[1 + 3].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 3].tipoDeToken == TipoDeToken.MenorIgual)
+                (tokens[i + 3].tipoDeToken == TipoDeToken.Menor || tokens[i + 3].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 3].tipoDeToken == TipoDeToken.MenorIgual)
                 && (tokens[i + 4].tipoDeToken == TipoDeToken.Real || tokens[i + 4].tipoDeToken == TipoDeToken.Entero) &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
@@ -388,10 +414,10 @@ namespace ObjectiveD.AnalizadorSintactico
                 && tokens[i + 4].tipoDeToken == TipoDeToken.Igual && tokens[i + 5].tipoDeToken == TipoDeToken.Entero &&
                 tokens[i + 6].tipoDeToken == TipoDeToken.PuntoComa
                 && tokens[i + 7].tipoDeToken == TipoDeToken.Identificador &&
-                (tokens[1 + 8].tipoDeToken == TipoDeToken.Menor
-                 || tokens[1 + 8].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 8].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 8].tipoDeToken == TipoDeToken.MenorIgual) && (tokens[i + 9].tipoDeToken == TipoDeToken.Real
+                (tokens[i + 8].tipoDeToken == TipoDeToken.Menor
+                 || tokens[i + 8].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 8].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 8].tipoDeToken == TipoDeToken.MenorIgual) && (tokens[i + 9].tipoDeToken == TipoDeToken.Real
                                                                           ||
                                                                           tokens[i + 9].tipoDeToken ==
                                                                           TipoDeToken.Entero) &&
@@ -416,10 +442,10 @@ namespace ObjectiveD.AnalizadorSintactico
                 && tokens[i + 4].tipoDeToken == TipoDeToken.Igual && tokens[i + 5].tipoDeToken == TipoDeToken.Entero &&
                 tokens[i + 6].tipoDeToken == TipoDeToken.PuntoComa
                 && tokens[i + 7].tipoDeToken == TipoDeToken.Identificador &&
-                (tokens[1 + 8].tipoDeToken == TipoDeToken.Menor
-                 || tokens[1 + 8].tipoDeToken == TipoDeToken.Mayor ||
-                 tokens[1 + 8].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[1 + 8].tipoDeToken == TipoDeToken.MenorIgual) && (tokens[i + 9].tipoDeToken == TipoDeToken.Real
+                (tokens[i + 8].tipoDeToken == TipoDeToken.Menor
+                 || tokens[i + 8].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 8].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 8].tipoDeToken == TipoDeToken.MenorIgual) && (tokens[i + 9].tipoDeToken == TipoDeToken.Real
                                                                           ||
                                                                           tokens[i + 9].tipoDeToken ==
                                                                           TipoDeToken.Entero) &&
@@ -446,10 +472,10 @@ namespace ObjectiveD.AnalizadorSintactico
                 && tokens[i + 5].tipoDeToken == TipoDeToken.Identificador
                 && tokens[i + 6].tipoDeToken == TipoDeToken.PuntoComa
                 && tokens[i + 7].tipoDeToken == TipoDeToken.Identificador
-                && (tokens[1 + 8].tipoDeToken == TipoDeToken.Menor
-                    || tokens[1 + 8].tipoDeToken == TipoDeToken.Mayor ||
-                    tokens[1 + 8].tipoDeToken == TipoDeToken.MayorIgual ||
-                    tokens[1 + 8].tipoDeToken == TipoDeToken.MenorIgual)
+                && (tokens[i + 8].tipoDeToken == TipoDeToken.Menor
+                    || tokens[i + 8].tipoDeToken == TipoDeToken.Mayor ||
+                    tokens[i + 8].tipoDeToken == TipoDeToken.MayorIgual ||
+                    tokens[i + 8].tipoDeToken == TipoDeToken.MenorIgual)
                 && tokens[i + 9].tipoDeToken == TipoDeToken.Identificador
                 && tokens[i + 10].tipoDeToken == TipoDeToken.PuntoComa
                 && tokens[i + 11].tipoDeToken == TipoDeToken.Identificador &&
@@ -474,10 +500,10 @@ namespace ObjectiveD.AnalizadorSintactico
                 && tokens[i + 5].tipoDeToken == TipoDeToken.Identificador
                 && tokens[i + 6].tipoDeToken == TipoDeToken.PuntoComa
                 && tokens[i + 7].tipoDeToken == TipoDeToken.Identificador
-                && (tokens[1 + 8].tipoDeToken == TipoDeToken.Menor
-                    || tokens[1 + 8].tipoDeToken == TipoDeToken.Mayor ||
-                    tokens[1 + 8].tipoDeToken == TipoDeToken.MayorIgual ||
-                    tokens[1 + 8].tipoDeToken == TipoDeToken.MenorIgual)
+                && (tokens[i + 8].tipoDeToken == TipoDeToken.Menor
+                    || tokens[i + 8].tipoDeToken == TipoDeToken.Mayor ||
+                    tokens[i + 8].tipoDeToken == TipoDeToken.MayorIgual ||
+                    tokens[i + 8].tipoDeToken == TipoDeToken.MenorIgual)
                 && tokens[i + 9].tipoDeToken == TipoDeToken.Identificador
                 && tokens[i + 10].tipoDeToken == TipoDeToken.PuntoComa
                 && tokens[i + 11].tipoDeToken == TipoDeToken.Identificador &&
@@ -498,7 +524,8 @@ namespace ObjectiveD.AnalizadorSintactico
                 && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial
                 && (tokens[i + 2].tipoDeToken == TipoDeToken.Integer
                 || tokens[i + 2].tipoDeToken == TipoDeToken.Double || tokens[i + 2].tipoDeToken == TipoDeToken.TipoString)
-                && tokens[i + 3].tipoDeToken == TipoDeToken.Identificador && tokens[1 + 4].tipoDeToken == TipoDeToken.In
+                && tokens[i + 3].tipoDeToken == TipoDeToken.Identificador 
+                && tokens[i + 4].tipoDeToken == TipoDeToken.In
                 && tokens[i + 5].tipoDeToken == TipoDeToken.Identificador
                 && tokens[i + 6].tipoDeToken == TipoDeToken.ParentesisFinal)
             {

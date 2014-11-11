@@ -23,45 +23,79 @@ namespace ObjectiveD.AnalizadorLexico
             string input = Console.ReadLine();
             inputArray = input.ToCharArray();
 
-            while (i < inputArray.Count())
+            for (i = 0; i < inputArray.Count(); )
             {
                 try
                 {
-
-                    esEspacio();
-                    esWhile();
-                    esElseIf();
-                    esElse();
-                    esIf();
-                    esIn();
-                    esParentesisInicial();
-                    esParentesisTerminal();
-                    esString();
-                    esInteger();
-                    esTipoString();
-                    esDouble();
-                    esForeach();
-                    esFor();
-                    esPuntoYComa();
-                    esMenorIgual();
-                    esMayorIgual();
-                    esMenor();
-                    esMayor();
-                    esIgualIgual();
-                    esIncremento();
-                    esDecremento();
-                    esMas();
-                    esMenos();
-                    esLlaveInicial();
-                    esLlaveTerminal();
-                    esIgual();
-                    esDiferente();
-                    esSaltoDeLinea();
-                    esIdentificador();
-                    if (!esDigito())
+                    if (esTipoString())
+                        continue;
+                    if (esInteger())
+                        continue;
+                    if (esDouble())
+                        continue;
+                    if (esDouble())
+                        continue;
+                    if (esIn())
+                        continue;
+                    if (esForeach())
+                        continue;
+                    if (esWhile())
+                        continue;
+                    if (esElseIf())
+                        continue;
+                    if (esElse())
+                        continue;
+                    if (esIf())
+                        continue;
+                    if (esString())
+                        continue;
+                    if (esFor())
+                        continue;
+                    if (esPuntoYComa())
+                        continue;
+                    if (esMenorIgual())
+                        continue;
+                    if (esMayorIgual())
+                        continue;
+                    if (esMenor())
+                        continue;
+                    if (esMayor())
+                        continue;
+                    if (esIgualIgual())
+                        continue;
+                    if (esIncremento())
+                        continue;
+                    if (esDecremento())
+                        continue;
+                    if (esMas())
+                        continue;
+                    if (esMenos())
+                        continue;
+                    if (esLlaveInicial())
+                        continue;
+                    if (esLlaveTerminal())
+                        continue;
+                    if (esIgual())
+                        continue;
+                    if (esDiferente())
+                        continue;
+                    if (esSaltoDeLinea())
+                        continue;
+                    if (esIdentificador())
+                        continue;
+                    if (esParentesisInicial())
+                        continue;
+                    if (esParentesisTerminal())
+                        continue;
+                    if (esDigito())
+                        continue;
+                    if (esEspacio())
+                        continue;
+                    if (!endOfInput())
                     {
                         inputs.Add(new Input(TipoDeToken.Error, inputArray[i].ToString(), NoLinea));
                         i++;
+                        continue;
                     }
                 }
                 catch (Exception)
@@ -150,11 +184,17 @@ namespace ObjectiveD.AnalizadorLexico
         }
 
 
-        private void esEspacio()
+        private bool esEspacio()
         {
             if (!endOfInput())
-                if (inputArray[i] == ' ')
+            {
+                if (string.IsNullOrWhiteSpace(inputArray[i].ToString()))
+                {
                     i++;
+                    return true;
+                }
+            }
+            return false;
         }
 
         private bool endOfInput()
