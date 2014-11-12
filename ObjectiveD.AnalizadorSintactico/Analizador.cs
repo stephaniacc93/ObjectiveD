@@ -160,7 +160,7 @@ namespace ObjectiveD.AnalizadorSintactico
             if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 3].tipoDeToken == TipoDeToken.IgualIgual
-                && tokens[i + 4].tipoDeToken == TipoDeToken.String &&
+                && (tokens[i + 4].tipoDeToken == TipoDeToken.String || tokens[i + 4].tipoDeToken == TipoDeToken.Entero || tokens[i + 4].tipoDeToken == TipoDeToken.Real ) &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
                 i += 6;

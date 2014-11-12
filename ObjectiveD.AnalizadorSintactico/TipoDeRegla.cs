@@ -16,7 +16,7 @@ namespace ObjectiveD.AnalizadorSintactico
         If3,
         //if(entero/real operador entero/real)    -ya
         If4,
-        //if(identificador igualigual string) -ya
+        //if(identificador igualigual string/entero/real) -  FALTA
         If5,
 
         //else(identificador operador identificador)   -ya
