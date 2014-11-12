@@ -502,7 +502,7 @@ namespace ObjectiveD.AnalizadorSintactico
                 && (tokens[i + 2].tipoDeToken == TipoDeToken.Integer
                     || tokens[i + 2].tipoDeToken == TipoDeToken.Double) &&
                 tokens[i + 3].tipoDeToken == TipoDeToken.Identificador
-                && tokens[i + 4].tipoDeToken == TipoDeToken.Igual && tokens[i + 5].tipoDeToken == TipoDeToken.Entero &&
+                && tokens[i + 4].tipoDeToken == TipoDeToken.Igual && (tokens[i + 5].tipoDeToken == TipoDeToken.Entero || tokens[i + 5].tipoDeToken == TipoDeToken.Real) &&
                 tokens[i + 6].tipoDeToken == TipoDeToken.PuntoComa
                 && tokens[i + 7].tipoDeToken == TipoDeToken.Identificador &&
                 (tokens[i + 8].tipoDeToken == TipoDeToken.Menor
@@ -530,7 +530,7 @@ namespace ObjectiveD.AnalizadorSintactico
                 && (tokens[i + 2].tipoDeToken == TipoDeToken.Integer
                     || tokens[i + 2].tipoDeToken == TipoDeToken.Double) &&
                 tokens[i + 3].tipoDeToken == TipoDeToken.Identificador
-                && tokens[i + 4].tipoDeToken == TipoDeToken.Igual && tokens[i + 5].tipoDeToken == TipoDeToken.Entero &&
+                && tokens[i + 4].tipoDeToken == TipoDeToken.Igual && (tokens[i + 5].tipoDeToken == TipoDeToken.Entero || tokens[i + 5].tipoDeToken == TipoDeToken.Real) &&
                 tokens[i + 6].tipoDeToken == TipoDeToken.PuntoComa
                 && tokens[i + 7].tipoDeToken == TipoDeToken.Identificador &&
                 (tokens[i + 8].tipoDeToken == TipoDeToken.Menor
