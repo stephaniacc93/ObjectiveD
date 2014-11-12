@@ -18,6 +18,8 @@ namespace ObjectiveD.AnalizadorSintactico
         If4,
         //if(identificador igualigual string/entero/real) -  FALTA
         If5,
+        //if(identificador igualigual identificador) -  FALTA
+        If6,
 
         //else(identificador operador identificador)   -ya
         Else1,
@@ -29,6 +31,8 @@ namespace ObjectiveD.AnalizadorSintactico
         Else4,
         //else(identificador igualigual string) -ya
         Else5,
+        //else(identificador igualigual identificador) -  FALTA
+        Else6,
 
         //elseif(identificador operador identificador)     -ya
         Elseif1,
@@ -40,6 +44,8 @@ namespace ObjectiveD.AnalizadorSintactico
         Elseif4,
         //elseif(identificador igualigual string) -ya
         ElseIf5,
+        //elseif(identificador igualigual identificador)
+        ElseIf6,
 
         //while(identificador operador identificador)     -ya
         While1,
@@ -49,8 +55,10 @@ namespace ObjectiveD.AnalizadorSintactico
         While3,
         //while(entero/real operador entero/real)  -ya
         While4,
-
+        //while(identificador igualigual string) -ya
         While5,
+        //while(identificador igualigual identificador)
+        While6,
 
         // for ( tipo de variable identificador igual entero; identificador operador variable; identificador ++)     -ya
         For1,

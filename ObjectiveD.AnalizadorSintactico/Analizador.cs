@@ -34,6 +34,8 @@ namespace ObjectiveD.AnalizadorSintactico
                         continue;
                     if (esIf5())
                         continue;
+                    if(esIf6())
+                        continue;
                     if (esElse1())
                         continue;
                     if (esElse2())
@@ -43,6 +45,8 @@ namespace ObjectiveD.AnalizadorSintactico
                     if (esElse4())
                         continue;
                     if (esElse5())
+                        continue;
+                    if(esElse6())
                         continue;
                     if (esElseIf1())
                         continue;
@@ -54,6 +58,8 @@ namespace ObjectiveD.AnalizadorSintactico
                         continue;
                     if (esElseIf5())
                         continue;
+                    if (esElseIf6())
+                        continue;
                     if (esWhile1())
                         continue;
                     if (esWhile2())
@@ -63,6 +69,8 @@ namespace ObjectiveD.AnalizadorSintactico
                     if (esWhile4())
                         continue;
                     if(esWhile5())
+                        continue;
+                    if(esWhile6())
                         continue;
                     if (esFor1())
                         continue;
@@ -172,6 +180,22 @@ namespace ObjectiveD.AnalizadorSintactico
             return false;
         }
 
+        private bool esIf6()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
+                tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
+                tokens[i + 3].tipoDeToken == TipoDeToken.IgualIgual
+                && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
+                tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
+            {
+                i += 6;
+                Reglas.Add(TipoDeRegla.If6);
+                return true;
+            }
+            return false;
+        }
+
+
         private bool esElse1()
         {
             if (tokens[i].tipoDeToken == TipoDeToken.Else && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
@@ -250,6 +274,21 @@ namespace ObjectiveD.AnalizadorSintactico
             {
                 i += 6;
                 Reglas.Add(TipoDeRegla.Else5);
+                return true;
+            }
+            return false;
+        }
+
+        private bool esElse6()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.Else && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
+                tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
+                tokens[i + 3].tipoDeToken == TipoDeToken.IgualIgual
+                && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
+                tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
+            {
+                i += 6;
+                Reglas.Add(TipoDeRegla.Else6);
                 return true;
             }
             return false;
@@ -343,6 +382,21 @@ namespace ObjectiveD.AnalizadorSintactico
             return false;
         }
 
+        private bool esElseIf6()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.Elseif && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
+                tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
+                tokens[i + 3].tipoDeToken == TipoDeToken.IgualIgual
+                && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
+                tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
+            {
+                i += 6;
+                Reglas.Add(TipoDeRegla.ElseIf6);
+                return true;
+            }
+            return false;
+        }
+
         private bool esWhile1()
         {
             if (tokens[i].tipoDeToken == TipoDeToken.While && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
@@ -422,6 +476,21 @@ namespace ObjectiveD.AnalizadorSintactico
             {
                 i += 6;
                 Reglas.Add(TipoDeRegla.While5);
+                return true;
+            }
+            return false;
+        }
+
+        private bool esWhile6()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.While && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
+                tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
+                tokens[i + 3].tipoDeToken == TipoDeToken.IgualIgual
+                && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
+                tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
+            {
+                i += 6;
+                Reglas.Add(TipoDeRegla.While6);
                 return true;
             }
             return false;
