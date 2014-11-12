@@ -34,7 +34,7 @@ namespace ObjectiveD.AnalizadorSintactico
                         continue;
                     if (esIf5())
                         continue;
-                    if(esIf6())
+                    if (esIf6())
                         continue;
                     if (esElse1())
                         continue;
@@ -46,7 +46,7 @@ namespace ObjectiveD.AnalizadorSintactico
                         continue;
                     if (esElse5())
                         continue;
-                    if(esElse6())
+                    if (esElse6())
                         continue;
                     if (esElseIf1())
                         continue;
@@ -68,11 +68,15 @@ namespace ObjectiveD.AnalizadorSintactico
                         continue;
                     if (esWhile4())
                         continue;
-                    if(esWhile5())
+                    if (esWhile5())
                         continue;
-                    if(esWhile6())
+                    if (esWhile6())
                         continue;
                     if (esFor1())
+                        continue;
+                    if (esFor5())
+                        continue;
+                    if (esFor6())
                         continue;
                     if (esFor2())
                         continue;
@@ -85,7 +89,15 @@ namespace ObjectiveD.AnalizadorSintactico
                     if (esAsignacion())
                         continue;
                     i++;
-
+                    if (Reglas.Count == 0)
+                    {
+                        Reglas.Add(TipoDeRegla.ReglaNoExistente);
+                    }
+                    else
+                    {
+                        if (Reglas.Last() != TipoDeRegla.ReglaNoExistente)
+                            Reglas.Add(TipoDeRegla.ReglaNoExistente);
+                    }
                 }
                 catch (Exception)
                 {
@@ -170,7 +182,7 @@ namespace ObjectiveD.AnalizadorSintactico
             if (tokens[i].tipoDeToken == TipoDeToken.If && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial &&
                 tokens[i + 2].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 3].tipoDeToken == TipoDeToken.IgualIgual
-                && (tokens[i + 4].tipoDeToken == TipoDeToken.String || tokens[i + 4].tipoDeToken == TipoDeToken.Entero || tokens[i + 4].tipoDeToken == TipoDeToken.Real ) &&
+                && (tokens[i + 4].tipoDeToken == TipoDeToken.String || tokens[i + 4].tipoDeToken == TipoDeToken.Entero || tokens[i + 4].tipoDeToken == TipoDeToken.Real) &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
                 i += 6;
@@ -499,19 +511,16 @@ namespace ObjectiveD.AnalizadorSintactico
         private bool esFor1()
         {
             if (tokens[i].tipoDeToken == TipoDeToken.For && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial
-                && (tokens[i + 2].tipoDeToken == TipoDeToken.Integer
-                    || tokens[i + 2].tipoDeToken == TipoDeToken.Double) &&
+                && tokens[i + 2].tipoDeToken == TipoDeToken.Integer &&
                 tokens[i + 3].tipoDeToken == TipoDeToken.Identificador
-                && tokens[i + 4].tipoDeToken == TipoDeToken.Igual && (tokens[i + 5].tipoDeToken == TipoDeToken.Entero || tokens[i + 5].tipoDeToken == TipoDeToken.Real) &&
+                && tokens[i + 4].tipoDeToken == TipoDeToken.Igual && tokens[i + 5].tipoDeToken == TipoDeToken.Entero &&
                 tokens[i + 6].tipoDeToken == TipoDeToken.PuntoComa
                 && tokens[i + 7].tipoDeToken == TipoDeToken.Identificador &&
                 (tokens[i + 8].tipoDeToken == TipoDeToken.Menor
                  || tokens[i + 8].tipoDeToken == TipoDeToken.Mayor ||
                  tokens[i + 8].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[i + 8].tipoDeToken == TipoDeToken.MenorIgual) && (tokens[i + 9].tipoDeToken == TipoDeToken.Real
-                                                                          ||
-                                                                          tokens[i + 9].tipoDeToken ==
-                                                                          TipoDeToken.Entero) &&
+                 tokens[i + 8].tipoDeToken == TipoDeToken.MenorIgual) && tokens[i + 9].tipoDeToken ==
+                                                                          TipoDeToken.Entero &&
                 tokens[i + 10].tipoDeToken == TipoDeToken.PuntoComa
                 && tokens[i + 11].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 12].tipoDeToken == TipoDeToken.Incremento
@@ -524,22 +533,44 @@ namespace ObjectiveD.AnalizadorSintactico
             return false;
         }
 
+        private bool esFor5()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.For && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial
+                 && tokens[i + 2].tipoDeToken == TipoDeToken.Double &&
+                 tokens[i + 3].tipoDeToken == TipoDeToken.Identificador
+                 && tokens[i + 4].tipoDeToken == TipoDeToken.Igual && tokens[i + 5].tipoDeToken == TipoDeToken.Real &&
+                 tokens[i + 6].tipoDeToken == TipoDeToken.PuntoComa
+                 && tokens[i + 7].tipoDeToken == TipoDeToken.Identificador &&
+                 (tokens[i + 8].tipoDeToken == TipoDeToken.Menor
+                  || tokens[i + 8].tipoDeToken == TipoDeToken.Mayor ||
+                  tokens[i + 8].tipoDeToken == TipoDeToken.MayorIgual ||
+                  tokens[i + 8].tipoDeToken == TipoDeToken.MenorIgual) && tokens[i + 9].tipoDeToken ==
+                                                                           TipoDeToken.Real &&
+                 tokens[i + 10].tipoDeToken == TipoDeToken.PuntoComa
+                 && tokens[i + 11].tipoDeToken == TipoDeToken.Identificador &&
+                 tokens[i + 12].tipoDeToken == TipoDeToken.Incremento
+                 && tokens[i + 13].tipoDeToken == TipoDeToken.ParentesisFinal)
+            {
+                i += 14;
+                Reglas.Add(TipoDeRegla.For5);
+                return true;
+            }
+            return false;
+        }
+
         private bool esFor2()
         {
             if (tokens[i].tipoDeToken == TipoDeToken.For && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial
-                && (tokens[i + 2].tipoDeToken == TipoDeToken.Integer
-                    || tokens[i + 2].tipoDeToken == TipoDeToken.Double) &&
+                && tokens[i + 2].tipoDeToken == TipoDeToken.Integer &&
                 tokens[i + 3].tipoDeToken == TipoDeToken.Identificador
-                && tokens[i + 4].tipoDeToken == TipoDeToken.Igual && (tokens[i + 5].tipoDeToken == TipoDeToken.Entero || tokens[i + 5].tipoDeToken == TipoDeToken.Real) &&
+                && tokens[i + 4].tipoDeToken == TipoDeToken.Igual && tokens[i + 5].tipoDeToken == TipoDeToken.Entero &&
                 tokens[i + 6].tipoDeToken == TipoDeToken.PuntoComa
                 && tokens[i + 7].tipoDeToken == TipoDeToken.Identificador &&
                 (tokens[i + 8].tipoDeToken == TipoDeToken.Menor
                  || tokens[i + 8].tipoDeToken == TipoDeToken.Mayor ||
                  tokens[i + 8].tipoDeToken == TipoDeToken.MayorIgual ||
-                 tokens[i + 8].tipoDeToken == TipoDeToken.MenorIgual) && (tokens[i + 9].tipoDeToken == TipoDeToken.Real
-                                                                          ||
-                                                                          tokens[i + 9].tipoDeToken ==
-                                                                          TipoDeToken.Entero) &&
+                 tokens[i + 8].tipoDeToken == TipoDeToken.MenorIgual) &&
+                 tokens[i + 9].tipoDeToken == TipoDeToken.Entero &&
                 tokens[i + 10].tipoDeToken == TipoDeToken.PuntoComa
                 && tokens[i + 11].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 12].tipoDeToken == TipoDeToken.Decremento
@@ -547,6 +578,31 @@ namespace ObjectiveD.AnalizadorSintactico
             {
                 i += 14;
                 Reglas.Add(TipoDeRegla.For2);
+                return true;
+            }
+            return false;
+        }
+
+        private bool esFor6()
+        {
+            if (tokens[i].tipoDeToken == TipoDeToken.For && tokens[i + 1].tipoDeToken == TipoDeToken.ParentesisInicial
+                && tokens[i + 2].tipoDeToken == TipoDeToken.Double &&
+                tokens[i + 3].tipoDeToken == TipoDeToken.Identificador
+                && tokens[i + 4].tipoDeToken == TipoDeToken.Igual && tokens[i + 5].tipoDeToken == TipoDeToken.Real &&
+                tokens[i + 6].tipoDeToken == TipoDeToken.PuntoComa
+                && tokens[i + 7].tipoDeToken == TipoDeToken.Identificador &&
+                (tokens[i + 8].tipoDeToken == TipoDeToken.Menor
+                 || tokens[i + 8].tipoDeToken == TipoDeToken.Mayor ||
+                 tokens[i + 8].tipoDeToken == TipoDeToken.MayorIgual ||
+                 tokens[i + 8].tipoDeToken == TipoDeToken.MenorIgual) &&
+                 tokens[i + 9].tipoDeToken == TipoDeToken.Real &&
+                tokens[i + 10].tipoDeToken == TipoDeToken.PuntoComa
+                && tokens[i + 11].tipoDeToken == TipoDeToken.Identificador &&
+                tokens[i + 12].tipoDeToken == TipoDeToken.Decremento
+                && tokens[i + 13].tipoDeToken == TipoDeToken.ParentesisFinal)
+            {
+                i += 14;
+                Reglas.Add(TipoDeRegla.For6);
                 return true;
             }
             return false;
@@ -637,7 +693,7 @@ namespace ObjectiveD.AnalizadorSintactico
                 Reglas.Add(TipoDeRegla.Asignacion1);
                 if (!esExpresionHelper())
                 {
-                    Reglas.RemoveAt(Reglas.Count -1 );
+                    Reglas.RemoveAt(Reglas.Count - 1);
                     i -= 2;
                     return false;
                 }
@@ -652,7 +708,7 @@ namespace ObjectiveD.AnalizadorSintactico
                 if (!esExpresionHelper())
                 {
                     i -= 2;
-                    Reglas.RemoveAt(Reglas.Count -1);
+                    Reglas.RemoveAt(Reglas.Count - 1);
                     return false;
                 }
                 return true;
@@ -696,6 +752,7 @@ namespace ObjectiveD.AnalizadorSintactico
                     if (tokens[i + 2].tipoDeToken == TipoDeToken.Entero || tokens[i + 2].tipoDeToken == TipoDeToken.Real)
                     {
                         i += 3;
+                        Reglas.Add(TipoDeRegla.Expresion1);
                         return true;
                     }
                 }
