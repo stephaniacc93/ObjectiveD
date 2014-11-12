@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D9A85F68-9299-4791-BFA7-879D02AEDC2B}</ProjectGuid>
+    <ProjectGuid>{27638074-D2F6-452C-808C-253B902D5042}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ObjectiveD.Console</RootNamespace>
@@ -46,9 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ObjectiveD.AnalizadorSintactico\ObjectiveD.AnalizadorSintactico.csproj">

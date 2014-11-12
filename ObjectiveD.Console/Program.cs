@@ -15,7 +15,13 @@ namespace ObjectiveD.Console
 
             while (true)
             {
-                analizador.EmpezarAnalizador();
+                List<TipoDeRegla> reglasAplicadas = analizador.EmpezarAnalizador();
+
+                foreach (var reglasAplicada in reglasAplicadas)
+                {
+                    System.Console.WriteLine(reglasAplicada.ToString() + " | " + (int)reglasAplicada);
+                }
+                System.Console.ReadLine();
             }
         }
     }
