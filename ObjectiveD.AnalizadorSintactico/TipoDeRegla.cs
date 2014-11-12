@@ -50,6 +50,8 @@ namespace ObjectiveD.AnalizadorSintactico
         //while(entero/real operador entero/real)  -ya
         While4,
 
+        While5,
+
         // for ( tipo de variable identificador igual entero; identificador operador variable; identificador ++)     -ya
         For1,
         //  for ( tipo de variable identificador igual entero; identificador operador variable; identificador--)    -ya
