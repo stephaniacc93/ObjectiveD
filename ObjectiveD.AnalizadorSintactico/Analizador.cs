@@ -88,6 +88,28 @@ namespace ObjectiveD.AnalizadorSintactico
                         continue;
                     if (esAsignacion())
                         continue;
+                    if (esExpresion1())
+                        continue;
+                    if (esExpresion1())
+                        continue; 
+                    if (esExpresion2())
+                        continue;
+                    if (esExpresion5())
+                        continue;
+                    if (esExpresion6())
+                        continue;
+                    if (esExpresion7())
+                        continue;
+                    if (esExpresion8())
+                        continue; 
+                    if (esExpresion9())
+                        continue;
+                    if (esExpresion10())
+                        continue;
+                    if (esExpresion3())
+                        continue;
+                    if (esExpresion4())
+                        continue;
                     i++;
                     if (Reglas.Count == 0)
                     {
