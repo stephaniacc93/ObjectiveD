@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectiveD.AnalizadorLexico", "ObjectiveD.AnalizadorLexico\ObjectiveD.AnalizadorLexico.csproj", "{D2B7F059-8B39-4AA2-830C-C452128EF515}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectiveD.AnalizadorSintactico", "ObjectiveD.AnalizadorSintactico\ObjectiveD.AnalizadorSintactico.csproj", "{B35FA0BD-5F6A-4F85-8C0C-1D7D934DEA58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectiveD.AnalizadorSintactico-Semantico", "ObjectiveD.AnalizadorSintactico\ObjectiveD.AnalizadorSintactico-Semantico.csproj", "{B35FA0BD-5F6A-4F85-8C0C-1D7D934DEA58}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectiveD.Console", "ObjectiveD.Console\ObjectiveD.Console.csproj", "{27638074-D2F6-452C-808C-253B902D5042}"
 EndProject

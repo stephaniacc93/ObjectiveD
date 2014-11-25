@@ -48,9 +48,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ObjectiveD.AnalizadorSintactico\ObjectiveD.AnalizadorSintactico.csproj">
+    <ProjectReference Include="..\ObjectiveD.AnalizadorSintactico\ObjectiveD.AnalizadorSintactico-Semantico.csproj">
       <Project>{b35fa0bd-5f6a-4f85-8c0c-1d7d934dea58}</Project>
-      <Name>ObjectiveD.AnalizadorSintactico</Name>
+      <Name>ObjectiveD.AnalizadorSintactico-Semantico</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

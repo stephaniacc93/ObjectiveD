@@ -13,7 +13,7 @@ namespace ObjectiveD.AnalizadorSintactico
         private int i = 0;
         private Input[] tokens;
         private List<TipoDeRegla> Reglas = new List<TipoDeRegla>();
-
+        List<IInput> inputs = new List<IInput>();
         public List<TipoDeRegla> EmpezarAnalizador()
         {
             AnalizadorLexico.Analizador analizadorLexico = new AnalizadorLexico.Analizador();
@@ -109,6 +109,7 @@ namespace ObjectiveD.AnalizadorSintactico
                 && tokens[i + 4].tipoDeToken == TipoDeToken.Identificador &&
                 tokens[i + 5].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
+                inputs.Add(new If(tokens[i + 2].Lexema, tokens[i + 3].Lexema, tokens[i + 4].Lexema, TipoDeRegla.If1));
                 i += 6;
                 Reglas.Add(TipoDeRegla.If1);
                 return true;

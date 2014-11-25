@@ -76,21 +76,21 @@ namespace ObjectiveD.AnalizadorSintactico
         //tipo de variable identificador  = expresion
         Asignacion2,
 
-        //entero/real + entero/real       ya
+        //entero/real + entero/real  Expresion125678     ya
         Expresion1,
-        //entero/real - entero/real     ya
+        //entero/real - entero/real  Expresion125678   ya
         Expresion2,
         //entero/real        ya
         Expresion3,
         //identificador  ya
         Expresion4,
-        //entero/real + identificador   jose
+        //entero/real + identificadorExpresion125678   jose
         Expresion5,
-        //entero/real - identifcador  jose
+        //entero/real - identifcadorExpresion125678  jose
         Expresion6,
-        //identificador + identificador    jose
+        //identificador + identificador Expresion125678   jose
         Expresion7,
-        //identificador - identificador     jose
+        //identificador - identificadorExpresion125678     jose
         Expresion8,
         //identificador++       jose
         Expresion9,
