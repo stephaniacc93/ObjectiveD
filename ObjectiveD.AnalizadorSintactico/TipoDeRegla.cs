@@ -33,9 +33,9 @@ namespace ObjectiveD.AnalizadorSintactico
         //elseif(entero/real operador entero/real)    -ya
         Elseif4,
         //elseif(identificador igualigual string) -ya
-        ElseIf5,
+        Elseif5,
         //elseif(identificador igualigual identificador)
-        ElseIf6,
+        Elseif6,
 
         //while(identificador operador identificador)     -ya
         While1,
