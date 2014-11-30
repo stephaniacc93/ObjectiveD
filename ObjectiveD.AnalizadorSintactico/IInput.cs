@@ -8,5 +8,6 @@ namespace ObjectiveD.AnalizadorSintactico
 {
     public interface IInput
     {
+        TipoDeRegla TipoDeRegla { get; set; }
     }
 }

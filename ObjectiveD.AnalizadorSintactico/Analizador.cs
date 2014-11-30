@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +17,11 @@ namespace ObjectiveD.AnalizadorSintactico
         private List<TipoDeRegla> Reglas = new List<TipoDeRegla>();
         List<IInput> inputs = new List<IInput>();
         private IExpresion exp;
-        public List<TipoDeRegla> EmpezarAnalizador()
+        public List<IInput> EmpezarAnalizador()
         {
             AnalizadorLexico.Analizador analizadorLexico = new AnalizadorLexico.Analizador();
             tokens = analizadorLexico.EmpezarAnalizador().ToArray();
+            inputs = new List<IInput>();
             Reglas = new List<TipoDeRegla>();
 
             for (i = 0; i < tokens.Count(); )
@@ -97,7 +99,7 @@ namespace ObjectiveD.AnalizadorSintactico
                 }
             }
 
-            return Reglas;
+            return inputs;
 
         }
 
@@ -210,7 +212,7 @@ namespace ObjectiveD.AnalizadorSintactico
         {
             if (tokens[i].tipoDeToken == TipoDeToken.Else)
             {
-                inputs.Add(new Else());
+                inputs.Add(new Else(TipoDeRegla.Else));
                 i += 6;
                 Reglas.Add(TipoDeRegla.Else);
                 return true;

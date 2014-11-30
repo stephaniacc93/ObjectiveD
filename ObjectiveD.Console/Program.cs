@@ -15,11 +15,11 @@ namespace ObjectiveD.Console
 
             while (true)
             {
-                List<TipoDeRegla> reglasAplicadas = analizador.EmpezarAnalizador();
+                List<IInput> inputs = analizador.EmpezarAnalizador();
 
-                foreach (var reglasAplicada in reglasAplicadas)
+                foreach (var reglasAplicada in inputs)
                 {
-                    System.Console.WriteLine(reglasAplicada.ToString() + " | " + (int)reglasAplicada);
+                    System.Console.WriteLine(reglasAplicada.TipoDeRegla.ToString());
                 }
                 System.Console.ReadLine();
             }
