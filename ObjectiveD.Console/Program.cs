@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,16 @@ namespace ObjectiveD.Console
                 foreach (var reglasAplicada in inputs)
                 {
                     System.Console.WriteLine(reglasAplicada.TipoDeRegla.ToString());
+
+                    foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(reglasAplicada))
+                    {
+                        string name =  "\n" + descriptor.Name + "\n";
+                        object value = descriptor.GetValue(reglasAplicada) + "\n";
+                        System.Console.WriteLine("{0}={1}", name, value);
+                    }
+
                 }
+
                 System.Console.ReadLine();
             }
         }

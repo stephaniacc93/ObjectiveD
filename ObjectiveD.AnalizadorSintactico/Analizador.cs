@@ -635,34 +635,33 @@ namespace ObjectiveD.AnalizadorSintactico
             if (tokens[i].tipoDeToken == TipoDeToken.Identificador
                 && tokens[i + 1].tipoDeToken == TipoDeToken.Igual)
             {
+                string identificador = tokens[i].Lexema;
                 i += 2;
                 Reglas.Add(TipoDeRegla.Asignacion1);
                 if (!esExpresionHelper())
                 {
                     Reglas.RemoveAt(Reglas.Count - 1);
-                    i -= 2;
+                    i -= 3;
                     return false;
                 }
-                i -= 2;
-                inputs.Add(new Asignacion1(tokens[i].Lexema, exp, TipoDeRegla.Asignacion1));
-                i += 2;
+                inputs.Add(new Asignacion1(identificador, exp, TipoDeRegla.Asignacion1));
                 return true;
             }
             else if ((tokens[i].tipoDeToken == TipoDeToken.Double || tokens[i].tipoDeToken == TipoDeToken.Integer)
                 && tokens[i + 1].tipoDeToken == TipoDeToken.Identificador
               && tokens[i + 2].tipoDeToken == TipoDeToken.Igual)
             {
+                string tipo = tokens[i].Lexema;
+                string identificador = tokens[i + 1].Lexema;
                 i += 3;
                 Reglas.Add(TipoDeRegla.Asignacion2);
                 if (!esExpresionHelper())
                 {
-                    i -= 2;
+                    i -= 4;
                     Reglas.RemoveAt(Reglas.Count - 1);
                     return false;
                 }
-                i -= 3;
-                inputs.Add(new Asignacion2(tokens[i].Lexema, tokens[i + 1].Lexema, exp, TipoDeRegla.Asignacion2));
-                i += 3;
+                inputs.Add(new Asignacion2(tipo, identificador, exp, TipoDeRegla.Asignacion2));
                 return true;
             }
             return false;
