@@ -51,7 +51,8 @@ namespace ObjectiveD.AnalizadorSintactico
         While6,
 
         // for (int identificador igual entero; identificador operador int; identificador ++)     -ya
-        For1,
+        For1, 
+
         // for (double identificador igual real; identificador operador real; identificador ++)
         For5,
 

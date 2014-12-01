@@ -453,7 +453,9 @@ namespace ObjectiveD.AnalizadorSintactico
                 tokens[i + 12].tipoDeToken == TipoDeToken.Incremento
                 && tokens[i + 13].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
-                inputs.Add(new For(tokens[i + 3].Lexema, tokens[i + 4].Lexema, tokens[i + 5].Lexema, tokens[i + 6].Lexema, tokens[i + 7].Lexema, true, TipoDeRegla.For1));
+                inputs.Add(new For(tokens[i + 3].Lexema, tokens[i + 4].Lexema, tokens[i + 5].Lexema,
+                    tokens[i + 7].Lexema, tokens[i + 8].Lexema, tokens[i + 9].Lexema, tokens[i + 11].Lexema, true,
+                    TipoDeRegla.For1));
                 i += 14;
                 Reglas.Add(TipoDeRegla.For1);
                 return true;
@@ -479,7 +481,9 @@ namespace ObjectiveD.AnalizadorSintactico
                  tokens[i + 12].tipoDeToken == TipoDeToken.Incremento
                  && tokens[i + 13].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
-                inputs.Add(new For(tokens[i + 3].Lexema, tokens[i + 4].Lexema, tokens[i + 5].Lexema, tokens[i + 6].Lexema, tokens[i + 7].Lexema, true, TipoDeRegla.For5));
+                inputs.Add(new For(tokens[i + 3].Lexema, tokens[i + 4].Lexema, tokens[i + 5].Lexema,
+                    tokens[i + 7].Lexema, tokens[i + 8].Lexema, tokens[i + 9].Lexema, tokens[i + 11].Lexema, true,
+                    TipoDeRegla.For5));
                 i += 14;
                 Reglas.Add(TipoDeRegla.For5);
                 return true;
@@ -505,7 +509,9 @@ namespace ObjectiveD.AnalizadorSintactico
                 tokens[i + 12].tipoDeToken == TipoDeToken.Decremento
                 && tokens[i + 13].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
-                inputs.Add(new For(tokens[i + 3].Lexema, tokens[i + 4].Lexema, tokens[i + 5].Lexema, tokens[i + 6].Lexema, tokens[i + 7].Lexema, false, TipoDeRegla.For2));
+                inputs.Add(new For(tokens[i + 3].Lexema, tokens[i + 4].Lexema, tokens[i + 5].Lexema,
+                    tokens[i + 7].Lexema, tokens[i + 8].Lexema, tokens[i + 9].Lexema, tokens[i + 11].Lexema, false,
+                    TipoDeRegla.For2));
                 i += 14;
                 Reglas.Add(TipoDeRegla.For2);
                 return true;
@@ -531,7 +537,9 @@ namespace ObjectiveD.AnalizadorSintactico
                 tokens[i + 12].tipoDeToken == TipoDeToken.Decremento
                 && tokens[i + 13].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
-                inputs.Add(new For(tokens[i + 3].Lexema, tokens[i + 4].Lexema, tokens[i + 5].Lexema, tokens[i + 6].Lexema, tokens[i + 7].Lexema, false, TipoDeRegla.For6));
+                inputs.Add(new For(tokens[i + 3].Lexema, tokens[i + 4].Lexema, tokens[i + 5].Lexema,
+                     tokens[i + 7].Lexema, tokens[i + 8].Lexema, tokens[i + 9].Lexema, tokens[i + 11].Lexema, false,
+                     TipoDeRegla.For6));
                 i += 14;
                 Reglas.Add(TipoDeRegla.For6);
                 return true;
@@ -560,7 +568,9 @@ namespace ObjectiveD.AnalizadorSintactico
                 tokens[i + 12].tipoDeToken == TipoDeToken.Incremento
                 && tokens[i + 13].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
-                inputs.Add(new For(tokens[i + 3].Lexema, tokens[i + 4].Lexema, tokens[i + 5].Lexema, tokens[i + 6].Lexema, tokens[i + 7].Lexema, true, TipoDeRegla.For3));
+                inputs.Add(new For(tokens[i + 3].Lexema, tokens[i + 4].Lexema, tokens[i + 5].Lexema,
+                     tokens[i + 7].Lexema, tokens[i + 8].Lexema, tokens[i + 9].Lexema, tokens[i + 11].Lexema, true,
+                     TipoDeRegla.For3));
                 i += 14;
                 Reglas.Add(TipoDeRegla.For3);
                 return true;
@@ -589,7 +599,9 @@ namespace ObjectiveD.AnalizadorSintactico
                 tokens[i + 12].tipoDeToken == TipoDeToken.Decremento
                 && tokens[i + 13].tipoDeToken == TipoDeToken.ParentesisFinal)
             {
-                inputs.Add(new For(tokens[i + 3].Lexema, tokens[i + 4].Lexema, tokens[i + 5].Lexema, tokens[i + 6].Lexema, tokens[i + 7].Lexema, false, TipoDeRegla.For4));
+                inputs.Add(new For(tokens[i + 3].Lexema, tokens[i + 4].Lexema, tokens[i + 5].Lexema,
+                     tokens[i + 7].Lexema, tokens[i + 8].Lexema, tokens[i + 9].Lexema, tokens[i + 11].Lexema, false,
+                     TipoDeRegla.For4));
                 i += 14;
                 Reglas.Add(TipoDeRegla.For4);
                 return true;
@@ -631,7 +643,9 @@ namespace ObjectiveD.AnalizadorSintactico
                     i -= 2;
                     return false;
                 }
+                i -= 2;
                 inputs.Add(new Asignacion1(tokens[i].Lexema, exp, TipoDeRegla.Asignacion1));
+                i += 2;
                 return true;
             }
             else if ((tokens[i].tipoDeToken == TipoDeToken.Double || tokens[i].tipoDeToken == TipoDeToken.Integer)
@@ -646,7 +660,9 @@ namespace ObjectiveD.AnalizadorSintactico
                     Reglas.RemoveAt(Reglas.Count - 1);
                     return false;
                 }
+                i -= 3;
                 inputs.Add(new Asignacion2(tokens[i].Lexema, tokens[i + 1].Lexema, exp, TipoDeRegla.Asignacion2));
+                i += 3;
                 return true;
             }
             return false;
@@ -690,7 +706,7 @@ namespace ObjectiveD.AnalizadorSintactico
                         if (tokens[i + 2].tipoDeToken == TipoDeToken.Entero ||
                             tokens[i + 2].tipoDeToken == TipoDeToken.Real)
                         {
-                            exp = new Expresion125678(tokens[i + 1].Lexema, tokens[i + 2].Lexema, tokens[i + 3].Lexema, TipoDeRegla.Expresion1);
+                            exp = new Expresion125678(tokens[i].Lexema, tokens[i + 1].Lexema, tokens[i + 2].Lexema, TipoDeRegla.Expresion1);
                             i += 3;
                             Reglas.Add(TipoDeRegla.Expresion1);
                             return true;
@@ -717,7 +733,7 @@ namespace ObjectiveD.AnalizadorSintactico
                         if (tokens[i + 2].tipoDeToken == TipoDeToken.Entero ||
                             tokens[i + 2].tipoDeToken == TipoDeToken.Real)
                         {
-                            exp = new Expresion125678(tokens[i + 1].Lexema, tokens[i + 2].Lexema, tokens[i + 3].Lexema, TipoDeRegla.Expresion2);
+                            exp = new Expresion125678(tokens[i].Lexema, tokens[i + 1].Lexema, tokens[i + 2].Lexema, TipoDeRegla.Expresion2);
                             i += 3;
                             Reglas.Add(TipoDeRegla.Expresion2);
                             return true;
@@ -778,7 +794,7 @@ namespace ObjectiveD.AnalizadorSintactico
                     if (tokens[i + 1].tipoDeToken == TipoDeToken.Mas)
                         if (tokens[i + 2].tipoDeToken == TipoDeToken.Identificador)
                         {
-                            exp = new Expresion125678(tokens[i + 1].Lexema, tokens[i + 2].Lexema, tokens[i + 3].Lexema, TipoDeRegla.Expresion5);
+                            exp = new Expresion125678(tokens[i].Lexema, tokens[i + 1].Lexema, tokens[i + 2].Lexema, TipoDeRegla.Expresion5);
                             i += 3;
                             Reglas.Add(TipoDeRegla.Expresion5);
                             return true;
@@ -799,7 +815,7 @@ namespace ObjectiveD.AnalizadorSintactico
                     if (tokens[i + 1].tipoDeToken == TipoDeToken.Menos)
                         if (tokens[i + 2].tipoDeToken == TipoDeToken.Identificador)
                         {
-                            exp = new Expresion125678(tokens[i + 1].Lexema, tokens[i + 2].Lexema, tokens[i + 3].Lexema, TipoDeRegla.Expresion6);
+                            exp = new Expresion125678(tokens[i].Lexema, tokens[i + 1].Lexema, tokens[i + 2].Lexema, TipoDeRegla.Expresion6);
                             i += 3;
                             Reglas.Add(TipoDeRegla.Expresion6);
                             return true;
@@ -820,7 +836,7 @@ namespace ObjectiveD.AnalizadorSintactico
                     if (tokens[i + 1].tipoDeToken == TipoDeToken.Mas)
                         if (tokens[i + 2].tipoDeToken == TipoDeToken.Identificador)
                         {
-                            exp = new Expresion125678(tokens[i + 1].Lexema, tokens[i + 2].Lexema, tokens[i + 3].Lexema, TipoDeRegla.Expresion7);
+                            exp = new Expresion125678(tokens[i].Lexema, tokens[i + 1].Lexema, tokens[i + 2].Lexema, TipoDeRegla.Expresion7);
                             i += 3;
                             Reglas.Add(TipoDeRegla.Expresion7);
                             return true;
@@ -841,7 +857,7 @@ namespace ObjectiveD.AnalizadorSintactico
                     if (tokens[i + 1].tipoDeToken == TipoDeToken.Menos)
                         if (tokens[i + 2].tipoDeToken == TipoDeToken.Identificador)
                         {
-                            exp = new Expresion125678(tokens[i + 1].Lexema, tokens[i + 2].Lexema, tokens[i + 3].Lexema, TipoDeRegla.Expresion8);
+                            exp = new Expresion125678(tokens[i].Lexema, tokens[i + 1].Lexema, tokens[i + 2].Lexema, TipoDeRegla.Expresion8);
                             i += 3;
                             Reglas.Add(TipoDeRegla.Expresion8);
                             return true;
@@ -861,7 +877,7 @@ namespace ObjectiveD.AnalizadorSintactico
                 if (tokens[i].tipoDeToken == TipoDeToken.Identificador)
                     if (tokens[i + 1].tipoDeToken == TipoDeToken.Incremento)
                     {
-                        exp = new Expresion910(tokens[i + 1].Lexema, true, TipoDeRegla.Expresion9);
+                        exp = new Expresion910(tokens[i].Lexema, true, TipoDeRegla.Expresion9);
                         i += 2;
                         Reglas.Add(TipoDeRegla.Expresion9);
                         return true;
@@ -881,7 +897,7 @@ namespace ObjectiveD.AnalizadorSintactico
                 if (tokens[i].tipoDeToken == TipoDeToken.Identificador)
                     if (tokens[i + 1].tipoDeToken == TipoDeToken.Decremento)
                     {
-                        exp = new Expresion910(tokens[i + 1].Lexema, false, TipoDeRegla.Expresion10);
+                        exp = new Expresion910(tokens[i].Lexema, false, TipoDeRegla.Expresion10);
                         i += 2;
                         Reglas.Add(TipoDeRegla.Expresion10);
                         return true;
