@@ -671,15 +671,7 @@ namespace ObjectiveD.AnalizadorSintactico
         private bool esExpresionHelper()
         {
             bool response = false;
-            if (esExpresion1())
-                response = true;
-            else if (esExpresion2())
-                response = true;
-            else if (esExpresion3())
-                response = true;
-            else if (esExpresion4())
-                response = true;
-            else if (esExpresion5())
+            if (esExpresion5())
                 response = true;
             else if (esExpresion6())
                 response = true;
@@ -690,6 +682,15 @@ namespace ObjectiveD.AnalizadorSintactico
             else if (esExpresion9())
                 response = true;
             else if (esExpresion10())
+                response = true;
+
+            else if (esExpresion1())
+                response = true;
+            else if (esExpresion2())
+                response = true;
+            else if (esExpresion3())
+                response = true;
+            else if (esExpresion4())
                 response = true;
             return response;
         }
